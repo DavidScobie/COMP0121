@@ -22,11 +22,14 @@ coronal_slice = imresize(coronal_slice,[(181.*spacings(3)) 217]);
 %finding dimensions of axial slice
 axial_size=size(axial_slice);
 
+% %Image the slices
+% subplot(2,2,1); imagesc(axial_slice)
+% subplot(2,2,2); imagesc(coronal_slice)
+% subplot(2,2,3); imagesc(sagittal_slice)
+
 %Image the slices
 subplot(2,2,1); imagesc(axial_slice)
-subplot(2,2,2); imagesc(coronal_slice)
+subplot(2,2,2); imagesc(coronal_slice(181:362,1:217))
 subplot(2,2,3); imagesc(sagittal_slice)
-
-disp('hello world');
 end
 
