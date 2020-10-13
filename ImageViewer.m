@@ -51,9 +51,7 @@ sagittal_x_up_bound  = round(((dimensions(1).*spacings(1))./2)+(dimensions(1)./2
 % subplot(2,2,2); imagesc(coronal_slice)
 % subplot(2,2,3); imagesc(sagittal_slice)
 
-%Image the slices
-subplot(2,2,1); imagesc(axial_slice(axial_y_low_bound:axial_y_up_bound,axial_x_low_bound:axial_x_up_bound));
-subplot(2,2,2); imagesc(coronal_slice(coronal_z_low_bound:coronal_z_up_bound,coronal_y_low_bound:coronal_y_up_bound));
-subplot(2,2,3); imagesc(sagittal_slice(sagittal_z_low_bound:sagittal_z_up_bound,sagittal_x_low_bound:sagittal_x_up_bound));
+%Image the slices to show spacings
+ShowFigues(axial_slice,coronal_slice,sagittal_slice,axial_y_low_bound,axial_y_up_bound,axial_x_low_bound,axial_x_up_bound,coronal_z_low_bound,coronal_z_up_bound,coronal_y_low_bound,coronal_y_up_bound,sagittal_z_low_bound,sagittal_z_up_bound,sagittal_x_low_bound,sagittal_x_up_bound)
 end
 
