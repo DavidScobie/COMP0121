@@ -57,6 +57,7 @@ xlim([0, noOfSteps*deltaT]);
 ylim([-0.5 0.5]);
 grid on;  
 
+%Create the rotation matrix
 rot = [cos(phi),sin(phi),0;-sin(phi),cos(phi),0;0,0,1];
 
 %Looping over  the 200 time increments
@@ -70,18 +71,18 @@ for i=0:noOfSteps-1
     %Updating deltaT
     deltaT=i./100;
     
-    % plot the current vector in figure h1
-    % function PlotSpin3D provided below
+    
+    % function plotSpin3D showing 3D spin precession. 
     hVecMu = plotSpin3D(h1, vecMu);
-    
+    % function hTransverseMu showing the precession in the x,y plane.
     hTransverseMu = plotSpinTransverse(h2,vecMu);
-    
+    % function plotSpinh_mux_t showing the precession of mux with time.
     h_mux_t = plotSpinh_mux_t(h3,vecMu,deltaT);
-    
+    % function plotSpinh_muy_t showing the precession of muy with time.
     h_muy_t = plotSpinh_muy_t(h4,vecMu,deltaT);
     
     pause(0.05);
-    
+    %Deleting all of the plots after a pause.
     delete(hVecMu);
     
     delete(hTransverseMu);
@@ -89,7 +90,7 @@ for i=0:noOfSteps-1
     delete(h_mux_t);
     
     delete(h_muy_t);
-    
+    %Plotting the precessions again.
     plotSpin3D(h1, vecMu);
     
     plotSpinTransverse(h2,vecMu);
