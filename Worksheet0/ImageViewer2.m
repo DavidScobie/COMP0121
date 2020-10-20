@@ -1,4 +1,4 @@
-function ImageViewer(filename,dimensions,spacings,xcoord,ycoord,zcoord)
+function ImageViewer2(filename,dimensions,spacings,xcoord,ycoord,zcoord)
 % UNTITLED 
 % Inputs
 % filename: The filename is the image you want to view.
