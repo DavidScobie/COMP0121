@@ -1,11 +1,18 @@
 clear all
 close all
+
 %Q3 parts 1 and 2
+
 mu=0.5;
 theta=pi./2;
 phi=pi./2;
+
 vecMu = mu*[cos(phi)*sin(theta) sin(phi)*sin(theta) cos(theta)]';
+vecMu0=vecMu;
+
 noOfSteps = 1000;
+w0=(2./3).*pi;
+w=w0;
 
 figure;
 h1=subplot(1,1,1)
@@ -20,13 +27,9 @@ ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-
-
-
-T1=4;
-T2=40;
-times=linspace(0,T1,noOfSteps);
-disp(vecMu)
+T1=10;
+T2=5;
+t=linspace(0,3.*T1,noOfSteps);
 
 B0=[0 0 mu];
 plot3([0 B0(1)], [0 B0(2)],...
@@ -38,58 +41,52 @@ plot3([0 vecMu(1)], [0 vecMu(2)],...
 
 
 for i=0:noOfSteps-1
-    phi=pi./30;
+    
     hVecMu = plotSpin3(h1, vecMu);
     
-    [vecMu(1),vecMu(2),vecMu(3)]=z_rotation(vecMu(1),vecMu(2),vecMu(3),phi);
-    vecMu(1)=exp(-times(i+1)./T2).*vecMu(1);
-    vecMu(2)=exp(-times(i+1)./T2).*vecMu(2);
-    vecMu(3)=(exp(-times(i+1)./T1).*vecMu(3))+mu.*(1-exp(-times(i+1)./T1));
-    
-    
-    
+    vecMu(1)=exp(-t(i+1)./T2).*((vecMu0(1).*cos(w.*t(i+1)))+(vecMu0(2).*sin(w.*t(i+1))));
+    vecMu(2)=exp(-t(i+1)./T2).*((vecMu0(2).*cos(w.*t(i+1)))-(vecMu0(1).*sin(w.*t(i+1))));
+    vecMu(3)=(vecMu0(3).*(exp(-t(i+1)./T1)))+mu.*(1-exp(-t(i+1)./T1));  
     
     pause(0.0005);
     
     delete(hVecMu);
     
     plotSpin3(h1, vecMu);
-%     
-    
-    
-    mag(i+1)=sqrt(vecMu(1).^2+vecMu(2).^2+vecMu(3).^2);
-%     magxy(i+1)=sqrt(vecMu(1).^2+vecMu(2));
+
 end
-disp('done')
+disp('done plot 1')
 %%
-%Q3 part 3
+
+%Q3 parts 3
 
 mu=0.5;
 theta=pi./2;
 phi=pi./2;
+
 vecMu = mu*[cos(phi)*sin(theta) sin(phi)*sin(theta) cos(theta)]';
+vecMu0=vecMu;
+
 noOfSteps = 1000;
+w0=(2./3).*pi;
+w=0;
 
 figure;
 h1=subplot(1,1,1)
 hold on;
 axis equal;
 view(100, 10);
-xlabel('\mu_x''');
-ylabel('\mu_y''');
+xlabel('\mu_x');
+ylabel('\mu_y');
 zlabel('\mu_z');
 xlim([-0.5 0.5]);
 ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-
-
-
-T1=4;
-T2=8;
-times=linspace(0,T1./2,noOfSteps);
-disp(vecMu)
+T1=10;
+T2=5;
+t=linspace(0,3.*T1,noOfSteps);
 
 B0=[0 0 mu];
 plot3([0 B0(1)], [0 B0(2)],...
@@ -101,58 +98,51 @@ plot3([0 vecMu(1)], [0 vecMu(2)],...
 
 
 for i=0:noOfSteps-1
-    phi=pi./30;
+    
     hVecMu = plotSpin3(h1, vecMu);
     
-    
-    vecMu(1)=exp(-times(i+1)./T2).*vecMu(1);
-    vecMu(2)=exp(-times(i+1)./T2).*vecMu(2);
-    vecMu(3)=(exp(-times(i+1)./T1).*vecMu(3))+mu.*(1-exp(-times(i+1)./T1));
-    
-    
-    
+    vecMu(1)=exp(-t(i+1)./T2).*((vecMu0(1).*cos(w.*t(i+1)))+(vecMu0(2).*sin(w.*t(i+1))));
+    vecMu(2)=exp(-t(i+1)./T2).*((vecMu0(2).*cos(w.*t(i+1)))-(vecMu0(1).*sin(w.*t(i+1))));
+    vecMu(3)=(vecMu0(3).*(exp(-t(i+1)./T1)))+mu.*(1-exp(-t(i+1)./T1));  
     
     pause(0.0005);
     
     delete(hVecMu);
     
     plotSpin3(h1, vecMu);
-%     
-    
-    
-    mag(i+1)=sqrt(vecMu(1).^2+vecMu(2).^2+vecMu(3).^2);
-%     magxy(i+1)=sqrt(vecMu(1).^2+vecMu(2));
+
 end
-disp('plot 2 done')
+disp('done plot 2')
 %%
 %Question 3 part 4
-%Q3 part 3
+
 mu=0.5;
 theta=pi./2;
 phi=pi./2;
+
 vecMu = mu*[cos(phi)*sin(theta) sin(phi)*sin(theta) cos(theta)]';
+vecMu0=vecMu;
+
 noOfSteps = 1000;
+w0=(2./3).*pi;
+w=0.1.*w0;
 
 figure;
 h1=subplot(1,1,1)
 hold on;
 axis equal;
 view(100, 10);
-xlabel('\mu_x''');
-ylabel('\mu_y''');
+xlabel('\mu_x');
+ylabel('\mu_y');
 zlabel('\mu_z');
 xlim([-0.5 0.5]);
 ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-
-
-
-T1=4;
-T2=40;
-times=linspace(0,T1,noOfSteps);
-disp(vecMu)
+T1=10;
+T2=5;
+t=linspace(0,3.*T1,noOfSteps);
 
 B0=[0 0 mu];
 plot3([0 B0(1)], [0 B0(2)],...
@@ -164,59 +154,51 @@ plot3([0 vecMu(1)], [0 vecMu(2)],...
 
 
 for i=0:noOfSteps-1
-    phi=pi./200;
+    
     hVecMu = plotSpin3(h1, vecMu);
     
-    [vecMu(1),vecMu(2),vecMu(3)]=z_rotation(vecMu(1),vecMu(2),vecMu(3),phi);
-    vecMu(1)=exp(-times(i+1)./T2).*vecMu(1);
-    vecMu(2)=exp(-times(i+1)./T2).*vecMu(2);
-    vecMu(3)=(exp(-times(i+1)./T1).*vecMu(3))+mu.*(1-exp(-times(i+1)./T1));
-    
-    
-    
+    vecMu(1)=exp(-t(i+1)./T2).*((vecMu0(1).*cos(w.*t(i+1)))+(vecMu0(2).*sin(w.*t(i+1))));
+    vecMu(2)=exp(-t(i+1)./T2).*((vecMu0(2).*cos(w.*t(i+1)))-(vecMu0(1).*sin(w.*t(i+1))));
+    vecMu(3)=(vecMu0(3).*(exp(-t(i+1)./T1)))+mu.*(1-exp(-t(i+1)./T1));  
     
     pause(0.0005);
     
     delete(hVecMu);
     
     plotSpin3(h1, vecMu);
-%     
-    
-    
-    mag(i+1)=sqrt(vecMu(1).^2+vecMu(2).^2+vecMu(3).^2);
-%     magxy(i+1)=sqrt(vecMu(1).^2+vecMu(2));
+
 end
 disp('plot 3 done')
 
 %%
 %Question 3 part 5
-%Q3 part 5
 mu=0.5;
 theta=pi./2;
 phi=pi./2;
+
 vecMu = mu*[cos(phi)*sin(theta) sin(phi)*sin(theta) cos(theta)]';
+vecMu0=vecMu;
+
 noOfSteps = 1000;
+w0=(2./3).*pi;
+w=-0.1.*w0;
 
 figure;
 h1=subplot(1,1,1)
 hold on;
 axis equal;
 view(100, 10);
-xlabel('\mu_x''');
-ylabel('\mu_y''');
+xlabel('\mu_x');
+ylabel('\mu_y');
 zlabel('\mu_z');
 xlim([-0.5 0.5]);
 ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-
-
-
-T1=4;
-T2=40;
-times=linspace(0,T1,noOfSteps);
-disp(vecMu)
+T1=10;
+T2=5;
+t=linspace(0,3.*T1,noOfSteps);
 
 B0=[0 0 mu];
 plot3([0 B0(1)], [0 B0(2)],...
@@ -228,27 +210,19 @@ plot3([0 vecMu(1)], [0 vecMu(2)],...
 
 
 for i=0:noOfSteps-1
-    phi=-pi./200;
+    
     hVecMu = plotSpin3(h1, vecMu);
     
-    [vecMu(1),vecMu(2),vecMu(3)]=z_rotation(vecMu(1),vecMu(2),vecMu(3),phi);
-    vecMu(1)=exp(-times(i+1)./T2).*vecMu(1);
-    vecMu(2)=exp(-times(i+1)./T2).*vecMu(2);
-    vecMu(3)=(exp(-times(i+1)./T1).*vecMu(3))+mu.*(1-exp(-times(i+1)./T1));
-    
-    
-    
+    vecMu(1)=exp(-t(i+1)./T2).*((vecMu0(1).*cos(w.*t(i+1)))+(vecMu0(2).*sin(w.*t(i+1))));
+    vecMu(2)=exp(-t(i+1)./T2).*((vecMu0(2).*cos(w.*t(i+1)))-(vecMu0(1).*sin(w.*t(i+1))));
+    vecMu(3)=(vecMu0(3).*(exp(-t(i+1)./T1)))+mu.*(1-exp(-t(i+1)./T1));  
     
     pause(0.0005);
     
     delete(hVecMu);
     
     plotSpin3(h1, vecMu);
-%     
-    
-    
-    mag(i+1)=sqrt(vecMu(1).^2+vecMu(2).^2+vecMu(3).^2);
-%     magxy(i+1)=sqrt(vecMu(1).^2+vecMu(2));
+
 end
 disp('plot 4 done')
     
