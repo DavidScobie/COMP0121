@@ -91,4 +91,4 @@ for i=0:noOfSteps-1
     ClearLinesFromAxes(h_up);
 
 end
-disp('done plot 1')
+plotSpin3_line_only(l,h1,vecMu,B1,vecMu_up);
