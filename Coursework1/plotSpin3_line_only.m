@@ -1,4 +1,4 @@
-function objHandle = plotSpin3_line_only(i,figHandle,vecMu,B1,vecMu_up,colors)
+function objHandle = plotSpin3_line_only(t,i,figHandle,vecMu,B1,vecMu_up,colors)
 
 % if nargin <3
     colors=['b','r'];
@@ -12,6 +12,8 @@ objHandle(2)=plot3(figHandle, [0 B1(1)], [0 B1(2)],...
 
 objHandle(3)=plot3(figHandle, [0 vecMu_up(1)], [0 vecMu_up(2)],...
     [0 vecMu_up(3)],'Color',colors(1),  'Linestyle', '-', 'LineWidth', 2);
+
+title(['time: ',num2str(t,'%.1f'),' ms']);
 
 if i==200
     delete(objHandle(1))

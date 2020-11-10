@@ -40,6 +40,7 @@ hold on
  
 for i=1:200
     
+    t_from_start=2.5.*i./200;
     vecMu(1)=mu.*[cos(phi(i)).*sin(theta(i))];
     vecMu(2)=mu.*[sin(phi(i)).*sin(theta(i))];
     vecMu(3)=mu.*cos(theta(i));
@@ -47,14 +48,14 @@ for i=1:200
     B1(1)=mu.*0.1.*cos(B1phi(i));
     B1(2)=mu.*0.1.*sin(B1phi(i));
     
-    hnew = plotSpin3_line_only(i,h1, vecMu ,B1, vecMu_up);
+    hnew = plotSpin3_line_only(t_from_start,i,h1, vecMu ,B1, vecMu_up);
     
     hold on
     pause(0.01)
     
     ClearLinesFromAxes(hnew)
 end
-plotSpin3_line_only(i,h1, vecMu ,B1,vecMu_up);
+plotSpin3_line_only(t_from_start,i,h1, vecMu ,B1,vecMu_up);
 
 %%
 
@@ -77,12 +78,14 @@ vecMu=[0 0 0];
 l=0;
 
 for i=0:noOfSteps-1
-   
+    
+    t_from_start=2.5+t(i+1);
+    
     vecMu_up(1)=exp(-t(i+1)./T2).*((vecMu0(1).*cos(w.*t(i+1)))+(vecMu0(2).*sin(w.*t(i+1))));
     vecMu_up(2)=exp(-t(i+1)./T2).*((vecMu0(2).*cos(w.*t(i+1)))-(vecMu0(1).*sin(w.*t(i+1))));
     vecMu_up(3)=(vecMu0(3).*(exp(-t(i+1)./T1)))+mu.*(1-exp(-t(i+1)./T1)); 
     
-    h_up = plotSpin3_line_only(l,h1,vecMu,B1,vecMu_up);
+    h_up = plotSpin3_line_only(t_from_start,l,h1,vecMu,B1,vecMu_up);
     
     hold on
     
@@ -91,4 +94,4 @@ for i=0:noOfSteps-1
     ClearLinesFromAxes(h_up);
 
 end
-plotSpin3_line_only(l,h1,vecMu,B1,vecMu_up);
+plotSpin3_line_only(t_from_start,l,h1,vecMu,B1,vecMu_up);

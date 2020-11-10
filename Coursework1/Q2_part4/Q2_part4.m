@@ -3,7 +3,7 @@ clear all
 close all
 
 %% create the video writer object
-video = VideoSetup('Q2_part4_vid');
+video = VideoSetup('Q2_part4_vid2');
 video.open();
 %%
 mu=0.5;
@@ -44,30 +44,38 @@ grid on;
 
 VideoAddFrame(video, h);
 
-t=1./noOfSteps;
+t=0;
 
 for i=0:noOfSteps-1
+    
+    t=i./noOfSteps;
     
     theta=pi./400;
     [vecMu(1),vecMu(2),vecMu(3)]=x_rotation(vecMu(1),vecMu(2),vecMu(3),theta);
     
     deltaT=i./200;
     
-    hVecMu = plotSpin3D(h1, vecMu);
-    h_muz_t = plotSpinh_muz_t(h3,vecMu,deltaT);  
-    h_muy_t = plotSpinh_muy_t(h4,vecMu,deltaT);   
+    hVecMu = plotSpin3D(t,h1, vecMu);
+    h_muz_t = plotSpinh_muz_t(h3,vecMu,deltaT);
+    h_muy_t = plotSpinh_muy_t(h4,vecMu,deltaT);
     
     VideoAddFrame(video, h);
     
     pause(0.001);
     
-    delete(hVecMu);
-    delete(h_muz_t);
-    delete(h_muy_t);
+%     delete(hVecMu);
+%     delete(h_muz_t);
+%     delete(h_muy_t);
     
-    plotSpin3D(h1, vecMu);
-    plotSpinh_muz_t(h3,vecMu,deltaT);
-    plotSpinh_muy_t(h4,vecMu,deltaT);
+%     plotSpin3D(t,h1, vecMu);
+%     plotSpinh_muz_t(h3,vecMu,deltaT);
+%     plotSpinh_muy_t(h4,vecMu,deltaT);
     
+    ClearLinesFromAxes(hVecMu);
+%     ClearLinesFromAxes(h_muz_t);
+%     ClearLinesFromAxes(h_muy_t);
 end
+plotSpin3D(t,h1, vecMu);
+plotSpinh_muz_t(h3,vecMu,deltaT);
+plotSpinh_muy_t(h4,vecMu,deltaT);
 video.close();
