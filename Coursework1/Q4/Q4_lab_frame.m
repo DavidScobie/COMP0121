@@ -41,7 +41,7 @@ label='B0';
 text(labelPosition(1),labelPosition(2),labelPosition(3),label);
 
  B1phi=linspace(6.*pi,0,200);
-%  VideoAddFrame(video, h);
+%   VideoAddFrame(video, h);
 for i=1:200
     
     t_from_start=2.5.*i./200;

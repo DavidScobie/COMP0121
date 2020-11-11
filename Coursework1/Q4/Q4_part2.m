@@ -36,7 +36,7 @@ hold on
 time_from_start=0;
 
  vecMu_up=[0 0 0];
- VideoAddFrame(video, h);
+%  VideoAddFrame(video, h);
  for i=0:noOfSteps-1
     time_from_start=1.*(i+1)./noOfSteps;
     theta=pi./(noOfSteps);

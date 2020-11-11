@@ -149,7 +149,7 @@ for i=0:noOfSteps-1
     time_from_start=t_end_part_2+((0.5).*(i+1))./noOfSteps;
     
     for k=1:noOfSpins
-        [vecMus(k,1),vecMus(k,2),vecMus(k,3)]=y_rotation(vecMus(k,1),vecMus(k,2),vecMus(k,3),theta);
+        [vecMus(k,1),vecMus(k,2),vecMus(k,3)]=x_rotation(vecMus(k,1),vecMus(k,2),vecMus(k,3),theta);
     end
     
     M_trans=(sum(sum(vecMus(:,1:2))))./(mu.*noOfSpins);
