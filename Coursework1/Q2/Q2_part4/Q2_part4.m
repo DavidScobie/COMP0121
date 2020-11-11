@@ -1,0 +1,81 @@
+%%Question 2 part 4
+clear all
+close all
+
+%% create the video writer object
+video = VideoSetup('Q2_part4_vid2');
+video.open();
+%%
+mu=0.5;
+theta=0;
+phi=pi./2;
+vecMu = mu*[cos(phi)*sin(theta) sin(phi)*sin(theta) cos(theta)]';
+noOfSteps = 200;
+deltaT = 0.01;
+
+h = figure;
+h1=subplot(2,2,1)
+hold on;
+axis equal;
+view(100, 10);
+xlabel('\mu_x''');
+ylabel('\mu_y''');
+zlabel('\mu_z');
+xlim([-0.5 0.5]);
+ylim([-0.5 0.5]);
+zlim([0 0.5]);
+grid on;
+
+h3 = subplot(2,2,3);
+hold on;
+xlabel('time (ms)');
+ylabel('\mu_z');
+xlim([0, noOfSteps*deltaT./2]);
+ylim([-0.5 0.5]);
+grid on;
+
+h4 = subplot(2,2,4);
+hold on;
+xlabel('time (ms)');
+ylabel('\mu_y''');
+xlim([0, noOfSteps*deltaT./2]);
+ylim([-0.5 0.5]);
+grid on; 
+
+VideoAddFrame(video, h);
+
+t=0;
+
+for i=0:noOfSteps-1
+    
+    t=i./noOfSteps;
+    
+    theta=pi./400;
+    [vecMu(1),vecMu(2),vecMu(3)]=x_rotation(vecMu(1),vecMu(2),vecMu(3),theta);
+    
+    deltaT=i./200;
+    
+    hVecMu = plotSpin3D(t,h1, vecMu);
+    h_muz_t = plotSpinh_muz_t(h3,vecMu,deltaT);
+    h_muy_t = plotSpinh_muy_t(h4,vecMu,deltaT);
+    
+    VideoAddFrame(video, h);
+    
+    pause(0.001);
+    
+%     delete(hVecMu);
+%     delete(h_muz_t);
+%     delete(h_muy_t);
+    
+%     plotSpin3D(t,h1, vecMu);
+%     plotSpinh_muz_t(h3,vecMu,deltaT);
+%     plotSpinh_muy_t(h4,vecMu,deltaT);
+    
+    ClearLinesFromAxes(hVecMu);
+%     ClearLinesFromAxes(h_muz_t);
+%     ClearLinesFromAxes(h_muy_t);
+end
+plotSpin3D(t,h1, vecMu);
+plotSpinh_muz_t(h3,vecMu,deltaT);
+plotSpinh_muy_t(h4,vecMu,deltaT);
+video.close();
