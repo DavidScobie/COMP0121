@@ -2,3 +2,45 @@ Video links:
 
 Question 2 part 4 video:
 https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q2_part4/Q2_part4_vid.mp4
+
+Question 3 part 1 video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part1_vid.mp4
+
+Question 3 part 2 video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part2_vid.mp4
+
+Question 3 part 3 (neglecting relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part3_vid_neglecting_relaxation.mp4
+
+Question 3 part 3 (including relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part3_vid_including_relaxation.mp4
+
+Question 3 part 4 (neglecting relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part4_vid_neglecting_relaxation.mp4
+
+Question 3 part 4 (including relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part4_vid_including_relaxation.mp4
+
+Question 3 part 5 (neglecting relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part5_vid_neglecting_relaxation.mp4
+
+Question 3 part 5 (including relaxation) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q3/Q3_part5_vid_including_relaxation.mp4
+
+Question 4 part 1 (laboratory frame) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q4/Q4_part1_lab_frame.mp4
+
+Question 4 part 1 (rotation frame) video:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q4/Q4_part1_rot_frame.mp4
+
+Question 4 part 2:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q4/Q4_part2.mp4
+
+Question 5 part 1:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q5/Q5_part1/Q5_part1_vid2.mp4
+
+Question 5 part 2:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q5/Q5_part2/Q5_part2_vid.mp4
+
+Question 5 part 4:
+https://github.com/DavidScobie/COMP0121/blob/coursework1/Coursework1/Q5/Q5_part4/Q5_part4_vid.mp4
