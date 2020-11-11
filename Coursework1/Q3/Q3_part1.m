@@ -1,8 +1,8 @@
 clear all
 close all
 %% create the video writer object
-video = VideoSetup('Q3_part1_vid');
-video.open();
+% video = VideoSetup('Q3_part1_vid');
+% video.open();
 %Q3 parts 1 and 2
 
 mu=0.5;
@@ -29,7 +29,7 @@ ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-VideoAddFrame(video, h);
+% VideoAddFrame(video, h);
 
 B0=[0 0 mu];
 plot3([0 B0(1)], [0 B0(2)],...
@@ -50,7 +50,7 @@ for i=0:noOfSteps-1
      [0 vecMu(3)],'color','r', 'Linestyle', '-', 'LineWidth', 2);
     title(['time=',num2str(i,'%2g'),'ns']);
  
-    VideoAddFrame(video, h);
+%     VideoAddFrame(video, h);
     pause(0.0005);
     
     ClearLinesFromAxes(hVecMu);
@@ -58,7 +58,7 @@ for i=0:noOfSteps-1
 end
 hVecMu = plot3(h1,[0 vecMu(1)], [0 vecMu(2)],...
     [0 vecMu(3)],'color','r', 'Linestyle', '-', 'LineWidth', 2);
-video.close();
+% video.close();
 
     
     
