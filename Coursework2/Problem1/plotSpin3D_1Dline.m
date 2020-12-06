@@ -8,7 +8,7 @@ function objHandle = plotSpin3D(no_of_spins,t,figHandle,vecMus,colors)
 %end
 %Plotting the vectors of the spins.
     j=size(vecMus);
-    k=j(2)
+    k=j(2);
     for i = 1:k
         objHandle(1)=plot3(figHandle, [i-((no_of_spins+1)./2) vecMus(1,i)], [0 vecMus(2,i)],...
             [0 vecMus(3,i)], 'Color',colors(1), 'Linestyle', '-', 'LineWidth', 2);
@@ -17,6 +17,6 @@ function objHandle = plotSpin3D(no_of_spins,t,figHandle,vecMus,colors)
             'Color', colors(2), 'Marker', '.', 'MarkerSize', 10);
     end
 
-% title(['t=',num2str(t,'%.1f'),'ms'])
+title(['t=',num2str(t,'%.2f'),'ms'])
 
 end

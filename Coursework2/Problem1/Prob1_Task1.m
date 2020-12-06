@@ -43,7 +43,7 @@ t=0;
 
 for i=0:noOfSteps-1
     
-    t=i./noOfSteps;
+    t=(i+1).*0.016;
     
     theta=pi./40;
     [vecMu(1),vecMu(2),vecMu(3)]=x_rotation(vecMu(1),vecMu(2),vecMu(3),theta);
@@ -64,4 +64,4 @@ for i=0:noOfSteps-1
     ClearLinesFromAxes(h1);
 end
 plotSpin3D_1Dline(no_of_spins,t,h1, vecMus);
-plotSpinh_muy_t(h4,vecMu,t);
+% plotSpinh_muy_t(h4,vecMu,t);
