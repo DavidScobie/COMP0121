@@ -3,8 +3,8 @@ clear all
 close all
 
 %% create the video writer object
-video = VideoSetup('Q2_part4_vid2');
-video.open();
+% video = VideoSetup('Q2_part4_vid2');
+% video.open();
 %%
 mu=0.5;
 theta=0;
@@ -42,7 +42,7 @@ xlim([0, noOfSteps*deltaT./2]);
 ylim([-0.5 0.5]);
 grid on; 
 
-VideoAddFrame(video, h);
+% VideoAddFrame(video, h);
 
 t=0;
 
@@ -59,7 +59,7 @@ for i=0:noOfSteps-1
     h_muz_t = plotSpinh_muz_t(h3,vecMu,deltaT);
     h_muy_t = plotSpinh_muy_t(h4,vecMu,deltaT);
     
-    VideoAddFrame(video, h);
+%     VideoAddFrame(video, h);
     
     pause(0.001);
     
@@ -78,4 +78,4 @@ end
 plotSpin3D(t,h1, vecMu);
 plotSpinh_muz_t(h3,vecMu,deltaT);
 plotSpinh_muy_t(h4,vecMu,deltaT);
-video.close();
+% video.close();
