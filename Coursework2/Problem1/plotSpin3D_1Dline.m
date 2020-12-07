@@ -1,4 +1,4 @@
-function objHandle = plotSpin3D(no_of_spins,t,figHandle,vecMus,colors)
+function objHandle = plotSpin3D_1Dline(no_of_spins,t,figHandle,vecMus,colors)
 %PLOTSPIN3D This function plots the 3D precession of a spin precessing
 %around the z axis in a magnetic field.
 %   To be used with worksheet1 script.
