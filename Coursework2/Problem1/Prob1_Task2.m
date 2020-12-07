@@ -88,32 +88,82 @@ xlim([-L./2 L./2]);
 ylim([-L./2 L./2]);
 grid on;
 
+set(0,'DefaultLegendAutoUpdate','off')
+
 vecMus2=vecMus(1:2,:);
-T2=5000;
+T2=10;
 N=256;
 Ts=5.12;
 stage=2;
 Gx=-4.6;
 
-for i = 1:N
-    t=0.32+(i.*(Ts./N));
-    for k = 1:no_of_spins
+w=linspace(-20,20,no_of_spins);
 
-        theta=Gx.*(k-((no_of_spins+1)./2)).*(pi./400);
+%Change Mtrans time axes limit
+xlim(h2,[0 Ts+0.32])
+
+for i = 1:N
+    
+    t=0.32+(i.*(Ts./N));
+    
+    for k = 1:no_of_spins
+        vecMus3(1,k)=exp((-t)./T2).*((vecMus2(1,11).*cos(w(k).*t))+((vecMus2(2,11).*(sin(w(k).*t)))));
+        vecMus3(2,k)=exp((-t)./T2).*((vecMus2(2,11).*cos(w(k).*t))-((vecMus2(1,11).*(sin(w(k).*t)))));
         
-        xorig(k) = vecMus0(1,k);
-        
-        [vecMus2(1,k),vecMus2(2,k),vecMus2(3,k)]=z_rotation_1Dline(xorig(k),vecMus2(1,k),vecMus2(2,k),0,theta)
+        vecMus4(1,k)=vecMus3(1,k)+vecMus2(1,k);
+        vecMus4(2,k)=vecMus3(2,k);        
     end
-    hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
+   
+    
+    
+    hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);
+    legend(h1,'hide')
+    %Calculating transverse magnetisation
+    for i = 1:no_of_spins    
+        Mx(i)=vecMus4(1,i)-vecMus2(1,i);
+        My(i)=vecMus4(2,i);
+    end
+    Mxtot=sum(Mx./(no_of_spins.*mu));
+    Mytot=sum(My./(no_of_spins.*mu));
+    
+    hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
+    
     pause(0.001);
     
     ClearLinesFromAxes(h1);
 end
-        
+hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);    
         
 
 %%
+
+% vec=[-10,0,10;0.5,0.5,0.5];
+% vec0=vec;
+% w=[-1,0,1];
+% 
+% 
+% 
+% for i=1:2
+%     t=0.2.*i;
+%     for k=1:3
+%         
+%         
+%         
+%         vec(1,k)=exp(-t./1).*((vec0(1,2).*cos(w(k).*t))+((vec0(2,2).*(sin(w(k).*t)))));
+%         vec(2,k)=exp(-t./1).*((vec0(2,2).*cos(w(k).*t))-((vec0(1,2).*(sin(w(k).*t)))));
+%         
+%         newvec(1,k)=vec(1,k)+vec0(1,k);
+%         newvec(2,k)=vec(2,k);
+%     end
+% end
+
+
+
+
+
+
+
+
 
         
         

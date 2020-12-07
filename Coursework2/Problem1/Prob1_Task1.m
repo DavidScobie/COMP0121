@@ -89,7 +89,7 @@ ylim([-L./2 L./2]);
 grid on;
 
 vecMus2=vecMus(1:2,:);
-T2=5000;
+T2=10;
 N=256;
 Ts=5.12;
 stage=2;
@@ -120,7 +120,7 @@ xlim(h2,[0 Ts+0.32])
 for i=1:N
     for k = 1:no_of_spins
         t=0.32+(i.*(Ts./N));
-        vecMus2(2,k)=exp((-t.*i)./T2).*0.5;
+        vecMus2(2,k)=exp((-t)./T2).*0.5;
     end
     
     hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
