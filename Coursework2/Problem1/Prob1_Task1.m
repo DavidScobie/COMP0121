@@ -1,5 +1,6 @@
 clear all
 close all
+set(0,'DefaultLegendAutoUpdate','off')
 
 mu=0.5;
 theta=0;
@@ -40,6 +41,7 @@ xlim([0, 0.32]);
 ylim([-1 1]);
 grid on; 
 
+stage=1;
 t=0;
 
 for i=0:noOfSteps-1
@@ -55,7 +57,7 @@ for i=0:noOfSteps-1
     end
     
     %Plot the spin vectors
-    hVecMu = plotSpin3D_1Dline(no_of_spins,t,h1, vecMus);
+    hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus);
 
     %Calculating transverse magnetisation
     for i = 1:no_of_spins    
@@ -73,6 +75,8 @@ for i=0:noOfSteps-1
 
 end
 
+%%
+
 %Redefine the axes to 2D now
 delete(h1)
 h1=subplot(2,2,1);
@@ -83,3 +87,66 @@ ylabel('y');
 xlim([-L./2 L./2]);
 ylim([-L./2 L./2]);
 grid on;
+
+vecMus2=vecMus(1:2,:);
+T2=5000;
+N=256;
+Ts=5.12;
+stage=2;
+
+G=0;
+
+h3 = subplot(2,2,3);
+hold on;
+xlabel('time (ms)');
+ylabel('G_x,G_y');
+xlim([0, Ts+0.32]);
+ylim([-5 5]);
+grid on; 
+
+K=0;
+
+h4 = subplot(2,2,4);
+hold on;
+xlabel('time (ms)');
+ylabel('k_x,k_y');
+xlim([0, Ts+0.32]);
+ylim([-0.6 0.6]);
+grid on; 
+
+%Change Mtrans time axes limit
+xlim(h2,[0 Ts+0.32])
+
+for i=1:N
+    for k = 1:no_of_spins
+        t=0.32+(i.*(Ts./N));
+        vecMus2(2,k)=exp((-t.*i)./T2).*0.5;
+    end
+    
+    hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
+    
+    %Calculating transverse magnetisation
+    for i = 1:no_of_spins    
+        Mx(i)=vecMus2(1,i)-vecMus0(1,i);
+        My(i)=vecMus2(2,i)-vecMus0(2,i);
+    end
+    Mxtot=sum(Mx./(no_of_spins.*mu));
+    Mytot=sum(My./(no_of_spins.*mu));
+    
+    hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
+    
+    plot(h3,t,G,'Color','k','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+    legend('k_t_o_t');
+    hold on
+    plot(h4,t,K,'Color','k','Marker', '.', 'MarkerSize', 10);
+    legend(h3);
+    hold on  
+    
+    
+    
+    pause(0.001);
+    
+    ClearLinesFromAxes(h1);
+    
+end
+h1 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
