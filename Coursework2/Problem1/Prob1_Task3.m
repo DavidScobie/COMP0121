@@ -5,9 +5,12 @@ set(0,'DefaultLegendAutoUpdate','off')
 mu=0.5;
 theta=0;
 phi=pi./2;
-noOfSteps = 16;
 deltaT = 0.01;
 
+N=256;
+GMax=4.6;
+Ts=5.12;
+noOfSteps = 16;
 L=20;
 spin_spacing=1;
 no_of_spins=(L./spin_spacing)+1;
@@ -29,7 +32,7 @@ xlabel('x');
 ylabel('y');
 zlabel('z');
 xlim([-L./2 L./2]);
-ylim([-0.5 0.5]);
+ylim([-L./2 L./2]);
 zlim([0 0.5]);
 grid on;
 
@@ -37,15 +40,15 @@ h3 = subplot(2,2,3);
 hold on;
 xlabel('time (ms)');
 ylabel('G_x,G_y');
-xlim([0, 8]);
-ylim([-5 5]);
+xlim([0, 0.32+(3.*Ts./2)]);
+ylim([-GMax GMax]);
 grid on; 
 
 h4 = subplot(2,2,4);
 hold on;
 xlabel('time (ms)');
 ylabel('k_x,k_y');
-xlim([0, 8]);
+xlim([0, 0.32+(3.*Ts./2)]);
 ylim([-3 3]);
 grid on; 
 
@@ -105,15 +108,14 @@ axis equal;
 xlabel('x');
 ylabel('y');
 xlim([-L./2 L./2]);
-ylim([-0.5 0.5]);
+ylim([-L./2 L./2]);
 grid on;
 
 set(0,'DefaultLegendAutoUpdate','off')
 
 vecMus2=vecMus(1:2,:);
 T2=10;
-N=256;
-Ts=5.12;
+
 stage=2;
 Gx=-4.6;
 
@@ -145,8 +147,8 @@ for i = 1:(N./2)
     kx1=0.1.*Gx.*t;
     
     for k = 1:no_of_spins
-        vecMus3(1,k)=exp((-t)./T2).*((vecMus2(1,11).*cos(w(k).*t))+((vecMus2(2,11).*(sin(w(k).*t)))));
-        vecMus3(2,k)=exp((-t)./T2).*((vecMus2(2,11).*cos(w(k).*t))-((vecMus2(1,11).*(sin(w(k).*t)))));
+        vecMus3(1,k)=exp((-t)./T2).*((vecMus2(1,((no_of_spins+1)./2)).*cos(w(k).*t))+((vecMus2(2,((no_of_spins+1)./2)).*(sin(w(k).*t)))));
+        vecMus3(2,k)=exp((-t)./T2).*((vecMus2(2,((no_of_spins+1)./2)).*cos(w(k).*t))-((vecMus2(1,((no_of_spins+1)./2)).*(sin(w(k).*t)))));
         
         vecMus4(1,k)=vecMus3(1,k)+vecMus2(1,k);
         vecMus4(2,k)=vecMus3(2,k);        
