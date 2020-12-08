@@ -36,14 +36,6 @@ ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-h2 = subplot(2,2,2);
-hold on;
-xlabel('time (ms)');
-ylabel('M_x,M_y');
-xlim([0, 0.32]);
-ylim([-1 1]);
-grid on; 
-
 G=0;
 
 h3 = subplot(2,2,3);
@@ -81,16 +73,6 @@ for i=0:noOfSteps-1
     
     %Plot the spin vectors
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus);
-
-    %Calculating transverse magnetisation
-    for i = 1:no_of_spins    
-        Mx(i)=vecMus(1,i)-vecMus0(1,i);
-        My(i)=vecMus(2,i)-vecMus0(2,i);
-    end
-    Mxtot=sum(Mx./(no_of_spins.*mu));
-    Mytot=sum(My./(no_of_spins.*mu));
-    
-    hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
     
     plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
 %     legend('k_t_o_t');
@@ -123,6 +105,14 @@ grid on;
 vecMus2=vecMus(1:2,:);
 T2=10;
 stage=2;
+
+h2 = subplot(2,2,2);
+hold on;
+xlabel('time (ms)');
+ylabel('M_x,M_y');
+xlim([0, 0.32]);
+ylim([-1 1]);
+grid on; 
 
 %Change Mtrans time axes limit
 xlim(h2,[0 Ts+0.32])

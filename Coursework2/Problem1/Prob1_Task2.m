@@ -33,14 +33,6 @@ ylim([-0.5 0.5]);
 zlim([0 0.5]);
 grid on;
 
-h2 = subplot(2,2,2);
-hold on;
-xlabel('time (ms)');
-ylabel('M_x,M_y');
-xlim([0, 0.32]);
-ylim([-1 1]);
-grid on; 
-
 h3 = subplot(2,2,3);
 hold on;
 xlabel('time (ms)');
@@ -80,17 +72,7 @@ for i=0:noOfSteps-1
     
     %Plot the spin vectors
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus);
-
-    %Calculating transverse magnetisation
-    for i = 1:no_of_spins    
-        Mx(i)=vecMus(1,i)-vecMus0(1,i);
-        My(i)=vecMus(2,i)-vecMus0(2,i);
-    end
-    Mxtot=sum(Mx./(no_of_spins.*mu));
-    Mytot=sum(My./(no_of_spins.*mu));
     
-    hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
- 
     
     plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
     %     legend('k_t_o_t');
@@ -136,10 +118,26 @@ Gx=-4.6;
 
 w=linspace(-4.*Gx,4.*Gx,no_of_spins);
 
+h2 = subplot(2,2,2);
+hold on;
+xlabel('time (ms)');
+ylabel('M_x,M_y');
+xlim([0, 0.32]);
+ylim([-1 1]);
+grid on; 
+
 %Change Mtrans time axes limit
 xlim(h2,[0 Ts+0.32])
 
+%Calculating transverse magnetisation
+for i = 1:no_of_spins
+    Mx(i)=vecMus(1,i)-vecMus0(1,i);
+    My(i)=vecMus(2,i)-vecMus0(2,i);
+end
+Mxtot=sum(Mx./(no_of_spins.*mu));
+Mytot=sum(My./(no_of_spins.*mu));
 
+hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
 
 for i = 1:N
     
