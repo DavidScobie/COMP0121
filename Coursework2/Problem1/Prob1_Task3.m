@@ -37,7 +37,7 @@ h3 = subplot(2,2,3);
 hold on;
 xlabel('time (ms)');
 ylabel('G_x,G_y');
-xlim([0, 5.44]);
+xlim([0, 8]);
 ylim([-5 5]);
 grid on; 
 
@@ -45,7 +45,7 @@ h4 = subplot(2,2,4);
 hold on;
 xlabel('time (ms)');
 ylabel('k_x,k_y');
-xlim([0, 5.44]);
+xlim([0, 8]);
 ylim([-3 3]);
 grid on; 
 
@@ -95,6 +95,7 @@ for i=0:noOfSteps-1
 end
 
 %%
+%Gx is on for Ts/2
 
 %Redefine the axes to 2D now
 delete(h1)
@@ -104,7 +105,7 @@ axis equal;
 xlabel('x');
 ylabel('y');
 xlim([-L./2 L./2]);
-ylim([-L./2 L./2]);
+ylim([-0.5 0.5]);
 grid on;
 
 set(0,'DefaultLegendAutoUpdate','off')
@@ -116,13 +117,13 @@ Ts=5.12;
 stage=2;
 Gx=-4.6;
 
-w=linspace(-4.*Gx,4.*Gx,no_of_spins);
+w=linspace(-2.*Gx,2.*Gx,no_of_spins);
 
 h2 = subplot(2,2,2);
 hold on;
 xlabel('time (ms)');
 ylabel('M_x,M_y');
-xlim(h2,[0 Ts+0.32])
+xlim(h2,[0 (1.5.*Ts)+0.32])
 ylim([-1 1]);
 grid on; 
 
@@ -137,9 +138,10 @@ Mytot=sum(My./(no_of_spins.*mu));
 
 hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
 
-for i = 1:N
+for i = 1:(N./2)
     
-    t=0.32+(i.*(Ts./N));
+    t_from_start=0.32+(i.*(Ts./N));
+    t=(i.*(Ts./N));
     kx=0.1.*Gx.*t;
     
     for k = 1:no_of_spins
@@ -182,23 +184,71 @@ for i = 1:N
     
     ClearLinesFromAxes(h1);
 end
-hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);    
-        
+% hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);    
+
+
+disp(vecMus4)
 
 %%
+%-Gx is on for Ts and ADC is on
 
+Gx=4.6;
+w=linspace(-2.*Gx,2.*Gx,no_of_spins);
 
-
-
-
-
-
-
-
+for i = 1:N
+    
+%     t=(0.32+(Ts./2))+(i.*(Ts./N));
+    t=(i.*(Ts./N));
+    kx=0.1.*Gx.*t;
+    
+    for k = 1:no_of_spins
+        %Moving initial vector to near origin
+        vecMus4orig(1,k)=vecMus4(1,k)-vecMus2(1,k);
+        vecMus4orig(2,k)=vecMus4(2,k);
         
+        %Bloch equations
+        vecMus5(1,k)=exp((-t)./T2).*((vecMus4orig(1,k).*cos(w(k).*t))+((vecMus4orig(2,k).*(sin(w(k).*t)))));
+        vecMus5(2,k)=exp((-t)./T2).*((vecMus4orig(2,k).*cos(w(k).*t))-((vecMus4orig(1,k).*(sin(w(k).*t)))));
         
-        
-        
-        
-
-
+        %Resetting position to actual
+        vecMus6(1,k)=vecMus5(1,k)+vecMus2(1,k);
+        vecMus6(2,k)=vecMus5(2,k);        
+    end
+     
+    hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus6);
+    legend(h1,'hide')
+ 
+    if i == 1 
+        disp(vecMus6)
+    end
+%     
+%     %Calculating transverse magnetisation
+%     for i = 1:no_of_spins    
+%         Mx(i)=vecMus6(1,i)-vecMus4(1,i);
+%         My(i)=vecMus6(2,i);
+%     end
+%     Mxtot=sum(Mx./(no_of_spins.*mu));
+%     Mytot=sum(My./(no_of_spins.*mu));
+%     
+%     hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
+%     
+%     
+%     plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
+%     %     legend('k_t_o_t');
+%     hold on
+%     plot(h3,t,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
+%     hold on
+%     
+%     
+%     plot(h4,t,kx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
+%     %     legend('k_t_o_t');
+%     hold on
+%     plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
+%     hold on    
+    
+    
+    pause(0.001);
+    
+    ClearLinesFromAxes(h1);
+end
+hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus6); 
