@@ -41,6 +41,28 @@ xlim([0, 0.32]);
 ylim([-1 1]);
 grid on; 
 
+h3 = subplot(2,2,3);
+hold on;
+xlabel('time (ms)');
+ylabel('G_x,G_y');
+xlim([0, 5.44]);
+ylim([-5 5]);
+grid on; 
+
+h4 = subplot(2,2,4);
+hold on;
+xlabel('time (ms)');
+ylabel('k_x,k_y');
+xlim([0, 5.44]);
+ylim([-3 3]);
+grid on; 
+
+Gx=0;
+Gy=0;
+
+kx=0;
+ky=0;
+
 stage=1;
 t=0;
 
@@ -68,6 +90,21 @@ for i=0:noOfSteps-1
     Mytot=sum(My./(no_of_spins.*mu));
     
     hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
+ 
+    
+    plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
+    %     legend('k_t_o_t');
+    hold on
+    plot(h3,t,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
+    hold on
+ 
+    
+    plot(h4,t,kx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
+    %     legend('k_t_o_t');
+    hold on
+    plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
+    hold on
+  
     
     pause(0.1);
     
@@ -97,14 +134,17 @@ Ts=5.12;
 stage=2;
 Gx=-4.6;
 
-w=linspace(-20,20,no_of_spins);
+w=linspace(-4.*Gx,4.*Gx,no_of_spins);
 
 %Change Mtrans time axes limit
 xlim(h2,[0 Ts+0.32])
 
+
+
 for i = 1:N
     
     t=0.32+(i.*(Ts./N));
+    kx=0.1.*Gx.*t;
     
     for k = 1:no_of_spins
         vecMus3(1,k)=exp((-t)./T2).*((vecMus2(1,11).*cos(w(k).*t))+((vecMus2(2,11).*(sin(w(k).*t)))));
@@ -113,9 +153,7 @@ for i = 1:N
         vecMus4(1,k)=vecMus3(1,k)+vecMus2(1,k);
         vecMus4(2,k)=vecMus3(2,k);        
     end
-   
-    
-    
+     
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);
     legend(h1,'hide')
     %Calculating transverse magnetisation
@@ -128,6 +166,21 @@ for i = 1:N
     
     hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
     
+    
+    plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
+    %     legend('k_t_o_t');
+    hold on
+    plot(h3,t,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
+    hold on
+    
+    
+    plot(h4,t,kx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
+    %     legend('k_t_o_t');
+    hold on
+    plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
+    hold on    
+    
+    
     pause(0.001);
     
     ClearLinesFromAxes(h1);
@@ -136,26 +189,6 @@ hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus4);
         
 
 %%
-
-% vec=[-10,0,10;0.5,0.5,0.5];
-% vec0=vec;
-% w=[-1,0,1];
-% 
-% 
-% 
-% for i=1:2
-%     t=0.2.*i;
-%     for k=1:3
-%         
-%         
-%         
-%         vec(1,k)=exp(-t./1).*((vec0(1,2).*cos(w(k).*t))+((vec0(2,2).*(sin(w(k).*t)))));
-%         vec(2,k)=exp(-t./1).*((vec0(2,2).*cos(w(k).*t))-((vec0(1,2).*(sin(w(k).*t)))));
-%         
-%         newvec(1,k)=vec(1,k)+vec0(1,k);
-%         newvec(2,k)=vec(2,k);
-%     end
-% end
 
 
 

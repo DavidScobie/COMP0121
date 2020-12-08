@@ -8,6 +8,9 @@ phi=pi./2;
 noOfSteps = 16;
 deltaT = 0.01;
 
+N=256;
+Ts=5.12;
+
 L=20;
 spin_spacing=1;
 no_of_spins=(L./spin_spacing)+1;
@@ -41,6 +44,26 @@ xlim([0, 0.32]);
 ylim([-1 1]);
 grid on; 
 
+G=0;
+
+h3 = subplot(2,2,3);
+hold on;
+xlabel('time (ms)');
+ylabel('G_x,G_y');
+xlim([0, Ts+0.32]);
+ylim([-5 5]);
+grid on; 
+
+K=0;
+
+h4 = subplot(2,2,4);
+hold on;
+xlabel('time (ms)');
+ylabel('k_x,k_y');
+xlim([0, Ts+0.32]);
+ylim([-0.6 0.6]);
+grid on; 
+
 stage=1;
 t=0;
 
@@ -69,6 +92,15 @@ for i=0:noOfSteps-1
     
     hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
     
+    plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+%     legend('k_t_o_t');
+    hold on
+    plot(h3,t,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+    plot(h4,t,K,'Color','r','Marker', '.', 'MarkerSize', 10);
+%     legend(h3);
+    hold on
+    plot(h4,t,K,'Color','b','Marker', '.', 'MarkerSize', 10);
+    
     pause(0.1);
     
     ClearLinesFromAxes(h1);
@@ -90,29 +122,7 @@ grid on;
 
 vecMus2=vecMus(1:2,:);
 T2=10;
-N=256;
-Ts=5.12;
 stage=2;
-
-G=0;
-
-h3 = subplot(2,2,3);
-hold on;
-xlabel('time (ms)');
-ylabel('G_x,G_y');
-xlim([0, Ts+0.32]);
-ylim([-5 5]);
-grid on; 
-
-K=0;
-
-h4 = subplot(2,2,4);
-hold on;
-xlabel('time (ms)');
-ylabel('k_x,k_y');
-xlim([0, Ts+0.32]);
-ylim([-0.6 0.6]);
-grid on; 
 
 %Change Mtrans time axes limit
 xlim(h2,[0 Ts+0.32])
@@ -123,6 +133,7 @@ for i=1:N
         vecMus2(2,k)=exp((-t)./T2).*0.5;
     end
     
+    legend(h1,'hide')
     hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
     
     %Calculating transverse magnetisation
@@ -135,12 +146,14 @@ for i=1:N
     
     hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
     
-    plot(h3,t,G,'Color','k','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
-    legend('k_t_o_t');
+    plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+%     legend('k_t_o_t');
     hold on
-    plot(h4,t,K,'Color','k','Marker', '.', 'MarkerSize', 10);
-    legend(h3);
-    hold on  
+    plot(h3,t,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+    plot(h4,t,K,'Color','r','Marker', '.', 'MarkerSize', 10);
+%     legend(h3);
+    hold on 
+    plot(h4,t,K,'Color','b','Marker', '.', 'MarkerSize', 10);
     
     
     
