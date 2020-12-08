@@ -119,12 +119,13 @@ xlim(h2,[0 Ts+0.32])
 
 for i=1:N
     for k = 1:no_of_spins
-        t=0.32+(i.*(Ts./N));
+        t_from_start=0.32+(i.*(Ts./N));
+        t=(i.*(Ts./N));
         vecMus2(2,k)=exp((-t)./T2).*0.5;
     end
     
     legend(h1,'hide')
-    hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
+    hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus2);
     
     %Calculating transverse magnetisation
     for i = 1:no_of_spins    
@@ -134,16 +135,16 @@ for i=1:N
     Mxtot=sum(Mx./(no_of_spins.*mu));
     Mytot=sum(My./(no_of_spins.*mu));
     
-    hMTrans = plot_Task1_MTrans(t,h2,Mxtot,Mytot);
+    hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
     
-    plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+    plot(h3,t_from_start,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
 %     legend('k_t_o_t');
     hold on
-    plot(h3,t,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
-    plot(h4,t,K,'Color','r','Marker', '.', 'MarkerSize', 10);
+    plot(h3,t_from_start,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
+    plot(h4,t_from_start,K,'Color','r','Marker', '.', 'MarkerSize', 10);
 %     legend(h3);
     hold on 
-    plot(h4,t,K,'Color','b','Marker', '.', 'MarkerSize', 10);
+    plot(h4,t_from_start,K,'Color','b','Marker', '.', 'MarkerSize', 10);
     
     
     
@@ -152,4 +153,4 @@ for i=1:N
     ClearLinesFromAxes(h1);
     
 end
-h1 = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus2);
+h1 = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus2);
