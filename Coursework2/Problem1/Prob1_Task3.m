@@ -5,13 +5,13 @@ set(0,'DefaultLegendAutoUpdate','off')
 mu=0.5;
 theta=0;
 phi=pi./2;
-deltaT = 0.01;
+
 
 N=256;
 GMax=4.6;
 Ts=5.12;
 noOfSteps = 16;
-L=20;
+L=30;
 spin_spacing=1;
 no_of_spins=(L./spin_spacing)+1;
 
@@ -21,7 +21,7 @@ for i = 1:no_of_spins
     vecMus0(1:3,i) = mu*[cos(phi)*sin(theta)+((2.*i)-(no_of_spins+1)) sin(phi)*sin(theta) cos(theta)]';
 end
 vecMus=vecMus0;
-vecMu = mu*[cos(phi)*sin(theta)+10 sin(phi)*sin(theta) cos(theta)]';
+
 
 h = figure;
 h1=subplot(2,2,1);
@@ -66,7 +66,7 @@ for i=0:noOfSteps-1
     t=(i+1).*0.02;
     
     theta=pi./32;
-    [vecMu(1),vecMu(2),vecMu(3)]=x_rotation(vecMu(1),vecMu(2),vecMu(3),theta);
+
     
     %calculate the vectors of each spin
     for i = 1:no_of_spins
