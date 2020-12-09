@@ -1,3 +1,4 @@
+%First the B1 flip
 clear all
 close all
 set(0,'DefaultLegendAutoUpdate','off')
@@ -77,3 +78,58 @@ for i=0:noOfSteps-1
 
 end
 plotSpin3D_2Dgrid(stage,no_of_spins,t,h1,vecMus0orig,vecMusReset);
+
+%%
+%Gy is on for Ts, this is the phase encoding gradient
+
+%Redefine the axes to 2D now
+delete(h1)
+h1=subplot(1,1,1);
+hold on;
+axis equal;
+xlabel('x');
+ylabel('y');
+xlim([-11 11]);
+ylim([-11 11]);
+grid on;
+
+set(0,'DefaultLegendAutoUpdate','off')
+
+vecMus2Reset=vecMusReset(1:2,:);
+T2=10;
+
+stage=2;
+Gy=4.6;
+
+wy=linspace(-2.*Gy,2.*Gy,no_of_spins);
+
+
+for i = 1:(N./2)
+    
+    t_from_start=0.32+(i.*(Ts./N));
+    t=(i.*(Ts./N));
+    ky1=0.1.*Gy.*t;
+    
+    for k = 1:no_of_spins
+        %Moving initial vector to near origin
+        vecMus2init(1,k)=vecMus2Reset(1,k)-vecMus0orig(1,k);
+        vecMus2init(2,k)=vecMus2Reset(2,k)-vecMus0orig(2,k);
+        
+        %Bloch equations
+        vecMus2rot(1,k)=exp((-t)./T2).*((vecMus2init(1,k).*cos(wy(k).*t))+((vecMus2init(2,k).*(sin(wy(k).*t)))));
+        vecMus2rot(2,k)=exp((-t)./T2).*((vecMus2init(2,k).*cos(wy(k).*t))-((vecMus2init(1,k).*(sin(wy(k).*t)))));
+        
+        %Resetting position to actual
+        vecMus2reset(1,k)=vecMus2rot(1,k)+vecMus0orig(1,k);
+        vecMus2reset(2,k)=vecMus2rot(2,k)+vecMus0orig(2,k);       
+    end
+    
+    hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
+%     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus4);
+    legend(h1,'hide')
+    
+    pause(0.001);
+    
+    ClearLinesFromAxes(h1);
+end
+plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
