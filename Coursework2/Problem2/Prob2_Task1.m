@@ -26,8 +26,6 @@ vecMusReset=vecMus0;
 vecMus0orig(1:2,:)=vecMus0(1:2,:);
 vecMus0orig(3,:)=zeros(1,no_of_spins);
 
-% vecMus=vecMus0;
-
 h = figure;
 h1=subplot(1,1,1);
 hold on;
@@ -95,16 +93,19 @@ grid on;
 
 set(0,'DefaultLegendAutoUpdate','off')
 
-vecMus2Reset=vecMusReset(1:2,:);
+vecMus2start=vecMusReset(1:2,:);
 T2=10;
 
 stage=2;
 Gy=4.6;
 
-wy=linspace(-2.*Gy,2.*Gy,no_of_spins);
+wy=zeros(no_of_spins);
+for i = 1:no_of_spins
+    wy(i)=(9.2./10).*(vecMus0orig(2,i));
+end    
 
 
-for i = 1:(N./2)
+for i = 1:N
     
     t_from_start=0.32+(i.*(Ts./N));
     t=(i.*(Ts./N));
@@ -112,8 +113,8 @@ for i = 1:(N./2)
     
     for k = 1:no_of_spins
         %Moving initial vector to near origin
-        vecMus2init(1,k)=vecMus2Reset(1,k)-vecMus0orig(1,k);
-        vecMus2init(2,k)=vecMus2Reset(2,k)-vecMus0orig(2,k);
+        vecMus2init(1,k)=vecMus2start(1,k)-vecMus0orig(1,k);
+        vecMus2init(2,k)=vecMus2start(2,k)-vecMus0orig(2,k);
         
         %Bloch equations
         vecMus2rot(1,k)=exp((-t)./T2).*((vecMus2init(1,k).*cos(wy(k).*t))+((vecMus2init(2,k).*(sin(wy(k).*t)))));
@@ -125,7 +126,6 @@ for i = 1:(N./2)
     end
     
     hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
-%     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus4);
     legend(h1,'hide')
     
     pause(0.001);
@@ -133,3 +133,44 @@ for i = 1:(N./2)
     ClearLinesFromAxes(h1);
 end
 plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
+
+%%
+%Gx is on for Ts/2, this is the dephasing lobe of the readout gradient 
+
+vecMus3start=vecMus2reset;
+Gx=-4.6;
+T2=10;
+
+wx=zeros(no_of_spins);
+for i = 1:no_of_spins
+    wx(i)=(9.2./10).*(vecMus0orig(1,i));
+end 
+
+for i = 1:N
+    
+    t_from_start=(0.32+Ts)+(i.*(Ts./N));
+    t=(i.*(Ts./N));
+    kx1=0.1.*Gx.*t;
+    
+    for k = 1:no_of_spins
+        %Moving initial vector to near origin
+        vecMus3init(1,k)=vecMus3start(1,k)-vecMus0orig(1,k);
+        vecMus3init(2,k)=vecMus3start(2,k)-vecMus0orig(2,k);
+        
+        %Bloch equations
+        vecMus3rot(1,k)=exp((-t)./T2).*((vecMus3init(1,k).*cos(wx(k).*t))+((vecMus3init(2,k).*(sin(wx(k).*t)))));
+        vecMus3rot(2,k)=exp((-t)./T2).*((vecMus3init(2,k).*cos(wx(k).*t))-((vecMus3init(1,k).*(sin(wx(k).*t)))));
+        
+        %Resetting position to actual
+        vecMus3reset(1,k)=vecMus3rot(1,k)+vecMus0orig(1,k);
+        vecMus3reset(2,k)=vecMus3rot(2,k)+vecMus0orig(2,k);       
+    end
+    
+    hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3reset);
+    legend(h1,'hide')
+    
+    pause(0.01);
+    
+    ClearLinesFromAxes(h1);
+end
+plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3reset);
