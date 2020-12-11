@@ -13,21 +13,18 @@ Ts=4;
 noOfSteps = 16;
 L=20;
 spin_spacing=1;
-% no_of_spins = 23;
-
-% vecMus0=zeros(3,no_of_spins);
-% vecMus0orig=zeros(3,no_of_spins);
 
 %The initial spin vector magnitudes
 
-%Uniform square distribution
-vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
-
-%Uniform square with a few rogue spins
-%vecMus0=[-4,-2,6,1,7,-3,-10,-5,0,-10,-5,0,-10,-5,0,5,10,0,5,10,0,5,10;-7,-1,9,5,4,-2,-10,-10,-10,-5,-5,-5,0,0,0,0,0,5,5,5,10,10,10;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
-
 %Totally random spins everywhere
-%vecMus0=[-9,-1.7,-3.8,-8.6,-9.1,-4.8,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;-1,-5.2,-1.1,-6.0,-5.7,-5.3,-0.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+vecMus0=[2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+
+%Uniform square distribution
+%vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+
+%Uniform square with random ones inside
+vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11,2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11,9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+
 vecMusReset=vecMus0;
 
 siz=size(vecMus0);
@@ -114,10 +111,11 @@ grid on;
 set(0,'DefaultLegendAutoUpdate','off')
 
 vecMus2start=vecMusReset(1:2,:);
-T2=10;
+T2=10000;
 
 stage=2;
-Gy=4.6./7;
+Gy=4.6./14;
+% Gy=0;
 
 wy=zeros(no_of_spins);
 for i = 1:no_of_spins
@@ -173,7 +171,7 @@ T2=10;
 
 wx=zeros(no_of_spins);
 for i = 1:no_of_spins
-    wx(i)=Gx.*0.3.*(vecMus0orig(1,i));
+    wx(i)=Gx.*0.7.*(vecMus0orig(1,i));
 end 
 
 for i = 1:N./2
@@ -218,13 +216,13 @@ plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3re
 %%
 %-Gx is on for Ts, this is the rephasing lobe of the readout gradient 
 
-vecMus3start=vecMus2reset;
+vecMus3start=vecMus3reset;
 Gx=4.6;
 T2=10;
 
 wx=zeros(no_of_spins);
 for i = 1:no_of_spins
-    wx(i)=Gx.*0.3.*(vecMus0orig(1,i));
+    wx(i)=Gx.*0.7.*(vecMus0orig(1,i));
 end 
 
 for i = 1:N
@@ -277,42 +275,4 @@ plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3re
 
 
 
-
-
-% %Creating the cauchy dist and making weightings accordingly
-% no_of_spins=17;
-% wmax=pi;
-% w=linspace(-wmax,wmax,no_of_spins);
-% middle=0;
-% delta=pi./2;
-% weightings = cauchy(w,middle,delta);
-% sumweights=sum(weightings);
-% norm_factor=no_of_spins./sumweights;
-% weightings=weightings.*norm_factor;
-% plot(weightings)
-% 
-% %%
-% clear all
-% close all
-% 
-% pd = makedist('tLocationScale','mu',3,'sigma',1,'nu',1);
-% x = -20:1:20;
-% y = pdf(pd,x);
-% plot(x,y,'LineWidth',2)
-% rng('default');  % For reproducibility
-% r = random(pd,10,1)
-% hold on
-% plot(r)
-% 
-% figure
-% pd = makedist('tLocationScale','mu',-3,'sigma',1,'nu',1);
-% x = -20:1:20;
-% y = pdf(pd,x);
-% plot(x,y,'LineWidth',2)
-% rng('default');  % For reproducibility
-% r = random(pd,10,1)
-% hold on
-% plot(r)
-
-%%
 
