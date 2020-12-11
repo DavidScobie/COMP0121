@@ -7,9 +7,9 @@ mu=0.5;
 theta=0;
 phi=pi./2;
 
-N=200;
+N=300;
 GMax=4.6;
-Ts=4;
+Ts=5.12;
 noOfSteps = 16;
 L=20;
 spin_spacing=1;
@@ -17,13 +17,13 @@ spin_spacing=1;
 %The initial spin vector magnitudes
 
 %Totally random spins everywhere
-vecMus0=[2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+%vecMus0=[2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
 
 %Uniform square distribution
-%vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
 
 %Uniform square with random ones inside
-vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11,2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11,9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,0,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+%vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11,2,3,-1,-9,-1.7,-3.8,-8.6,-9.1,-6.2,-4.1,-5.8,-6.0,4.7,1.8,8.6,7.1,2.8,9.1,5.8,6.0;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11,9,1,-7,-1,-5.2,-1.1,-6.0,-5.7,-5.3,-2.9,-6.9,-8.2,5.2,4.1,3.0,2.7,5.3,1.9,8.9,7.2;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
 
 vecMusReset=vecMus0;
 
@@ -79,7 +79,7 @@ for i=0:noOfSteps-1
     hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t,h1,vecMus0orig,vecMusReset);
     
        
-    pause(0.1);
+    pause(0.001);
     
     ClearLinesFromAxes(h1);
 
@@ -91,7 +91,7 @@ plotSpin3D_2Dgrid(stage,no_of_spins,t,h1,vecMus0orig,vecMusReset);
 
 %Redefine the axes to 2D now
 delete(h1)
-h1=subplot(2,2,1);
+h1=subplot(2,3,1);
 hold on;
 axis equal;
 xlabel('x');
@@ -100,12 +100,20 @@ xlim([-12 12]);
 ylim([-12 12]);
 grid on;
 
-h2 = subplot(2,2,2);
+h2 = subplot(2,3,2);
 hold on;
 xlabel('time (ms)');
 ylabel('M_x,M_y');
-xlim(h2,[0 (2.*Ts)+0.32])
+xlim([0 (2.*Ts)+0.32])
 ylim([-1 1]);
+grid on; 
+
+h3 = subplot(2,3,3);
+hold on;
+xlabel('time (ms)');
+ylabel('MTrans');
+xlim([0 (2.*Ts)+0.32])
+ylim([-0.5 0.5]);
 grid on; 
 
 set(0,'DefaultLegendAutoUpdate','off')
@@ -114,12 +122,12 @@ vecMus2start=vecMusReset(1:2,:);
 T2=10000;
 
 stage=2;
-Gy=4.6./14;
+Gy=4.6.*(-256./256);
 % Gy=0;
 
 wy=zeros(no_of_spins);
 for i = 1:no_of_spins
-    wy(i)=Gy.*0.3.*(vecMus0orig(2,i));
+    wy(i)=Gy.*(vecMus0orig(2,i));
 end    
 
 
@@ -156,6 +164,10 @@ for i = 1:N./2
     
     hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
     
+    MTrans=Mxtot+Mytot./2;
+    plot(h3,t_from_start,MTrans,'Color', 'k', 'Marker', '.', 'MarkerSize', 10)
+    hold on
+    
     pause(0.001);
     
     ClearLinesFromAxes(h1);
@@ -171,7 +183,7 @@ T2=10;
 
 wx=zeros(no_of_spins);
 for i = 1:no_of_spins
-    wx(i)=Gx.*0.7.*(vecMus0orig(1,i));
+    wx(i)=Gx.*(vecMus0orig(1,i));
 end 
 
 for i = 1:N./2
@@ -207,6 +219,10 @@ for i = 1:N./2
     
     hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
     
+    MTrans=Mxtot+Mytot./2;
+    plot(h3,t_from_start,MTrans,'Color', 'k', 'Marker', '.', 'MarkerSize', 10)
+    hold on    
+    
     pause(0.01);
     
     ClearLinesFromAxes(h1);
@@ -222,7 +238,7 @@ T2=10;
 
 wx=zeros(no_of_spins);
 for i = 1:no_of_spins
-    wx(i)=Gx.*0.7.*(vecMus0orig(1,i));
+    wx(i)=Gx.*(vecMus0orig(1,i));
 end 
 
 for i = 1:N
@@ -257,6 +273,10 @@ for i = 1:N
     Mytot=sum(My./(no_of_spins.*mu));
     
     hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
+    
+    MTrans=Mxtot+Mytot./2;
+    plot(h3,t_from_start,MTrans,'Color', 'k', 'Marker', '.', 'MarkerSize', 10)
+    hold on    
     
     pause(0.01);
     
