@@ -197,6 +197,7 @@ for i=1:5
         Mytot=sum(My./(no_of_spins.*mu));
 
         hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
+        legend(h2,{'M_x','M_y'})
 
         MTrans=Mxtot+Mytot./2;
         plot(h3,t_from_start,MTrans,'Color', 'k', 'Marker', '.', 'MarkerSize', 10)
@@ -208,14 +209,15 @@ for i=1:5
         hold on
         plot(h4,t_from_start,Gy1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
-
+        legend(h4,{'G_x','G_y'})
 
         plot(h5,t_from_start,kx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
         %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on
-
+        legend(h5,{'k_x','k_y'})
+        
         plot_kx_ky(h6,kx1,ky1)
 
         pause(0.001);

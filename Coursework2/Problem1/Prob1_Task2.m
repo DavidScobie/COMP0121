@@ -21,6 +21,7 @@ vecMus=vecMus0;
 vecMu = mu*[cos(phi)*sin(theta)+10 sin(phi)*sin(theta) cos(theta)]';
 
 h = figure;
+set(h, 'Units', 'Normalized', 'OuterPosition', [0 0 1 1]);
 h1=subplot(2,2,1);
 hold on;
 axis equal;
@@ -79,14 +80,15 @@ for i=0:noOfSteps-1
     hold on
     plot(h3,t,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
     hold on
- 
+    
+    legend(h3,{'G_x','G_y'})
     
     plot(h4,t,kx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
     %     legend('k_t_o_t');
     hold on
     plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on
-  
+    legend(h4,{'k_x','k_y'})
     
     pause(0.1);
     
