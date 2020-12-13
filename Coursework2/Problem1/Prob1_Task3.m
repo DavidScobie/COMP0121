@@ -11,7 +11,7 @@ N=256;
 GMax=4.6;
 Ts=5.12;
 noOfSteps = 16;
-L=30;
+L=20;
 spin_spacing=1;
 no_of_spins=(L./spin_spacing)+1;
 

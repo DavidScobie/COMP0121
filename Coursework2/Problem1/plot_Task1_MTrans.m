@@ -18,7 +18,7 @@ objHandle(2)=plot(figHandle,t,My,...
 hold on
 
 
-% legend;
+legend;
 
 
 % title(['t=',num2str(t,'%.2f'),'ms'])

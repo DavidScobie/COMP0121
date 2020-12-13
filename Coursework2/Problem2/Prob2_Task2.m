@@ -11,7 +11,7 @@ for i=1:5
     theta=0;
     phi=pi./2;
     
-    N=50;
+    N=256;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;

@@ -4,14 +4,14 @@ close all
 set(0,'DefaultLegendAutoUpdate','off')
 
 
-for i=5
+for i=1:5
     Gstep=(i-3).*2.3;
 
     mu=0.5;
     theta=0;
     phi=pi./2;
     
-    N=300;
+    N=256;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;
