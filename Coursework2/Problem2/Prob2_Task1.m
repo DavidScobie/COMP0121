@@ -2,7 +2,8 @@
 clear all
 close all
 set(0,'DefaultLegendAutoUpdate','off')
-
+% video = VideoSetup('Q2_task1_vid');
+% video.open();
 
 for i=1:5
     Gstep=(i-3).*2.3;
@@ -11,7 +12,7 @@ for i=1:5
     theta=0;
     phi=pi./2;
     
-    N=256;
+    N=100;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;
@@ -86,8 +87,9 @@ for i=1:5
 
         pause(0.001);
         title(h1,['t=',num2str(t,'%.2f'),'ms'])
+%         VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
-
+        
     end
     plotSpin3D_2Dgrid(stage,no_of_spins,t,h1,vecMus0orig,vecMusReset);
     title(h1,['t=',num2str(t,'%.2f'),'ms'])
@@ -223,8 +225,9 @@ for i=1:5
         plot_kx_ky(h6,kx1,ky1);
 
         pause(0.001);
-
+%         VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
+        
     end
     plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
 
@@ -300,8 +303,9 @@ for i=1:5
         plot_kx_ky(h6,kx2,ky2);
 
         pause(0.01);
-
+%         VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
+        
     end
     plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3reset);
 
@@ -373,8 +377,9 @@ for i=1:5
         plot_kx_ky(h6,kx3,ky3);
 
         pause(0.01);
-
+%         VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
+        
     end
     
     plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3reset);
@@ -388,7 +393,7 @@ for i=1:5
     end
 
 end
-
+% video.close(); 
 
 
 

@@ -2,6 +2,8 @@
 clear all
 close all
 set(0,'DefaultLegendAutoUpdate','off')
+video = VideoSetup('Q2_task2_vid');
+video.open();
 
 % for i=5
 for i=1:5
@@ -11,7 +13,7 @@ for i=1:5
     theta=0;
     phi=pi./2;
     
-    N=25;
+    N=100;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;
@@ -82,6 +84,7 @@ for i=1:5
 
         pause(0.001);
         title(h1,['t=',num2str(t,'%.2f'),'ms'])
+        VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
 
     end
@@ -222,7 +225,7 @@ for i=1:5
         plot_kx_ky(h6,kx1,ky1)
 
         pause(0.001);
-
+        VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
     end
     plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
@@ -294,7 +297,7 @@ for i=1:5
         plot_kx_ky(h6,kx2,ky2)
 
         pause(0.01);
-
+        VideoAddFrame(video, h);
         ClearLinesFromAxes(h1);
     end
     
@@ -309,7 +312,7 @@ for i=1:5
     end
 
 end
-
+video.close(); 
 
 
 

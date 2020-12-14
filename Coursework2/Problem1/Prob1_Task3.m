@@ -1,5 +1,8 @@
 clear all
 close all
+% video = VideoSetup('Q1_task3_vid');
+% video.open();
+
 set(0,'DefaultLegendAutoUpdate','off')
 
 mu=0.5;
@@ -92,7 +95,7 @@ for i=0:noOfSteps-1
     plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on
     legend(h4,{'k_x','k_y'})
-    
+%     VideoAddFrame(video, h);
     pause(0.1);
     
     ClearLinesFromAxes(h1);
@@ -184,7 +187,7 @@ for i = 1:(N./2)
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    
     
-    
+%     VideoAddFrame(video, h);
     pause(0.001);
     
     ClearLinesFromAxes(h1);
@@ -246,9 +249,10 @@ for i = 1:N
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    
     
-    
+%     VideoAddFrame(video, h);
     pause(0.001);
     
     ClearLinesFromAxes(h1);
 end
 hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus6); 
+% video.close(); 
