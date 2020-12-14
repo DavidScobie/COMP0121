@@ -1,5 +1,8 @@
 clear all
 close all
+% video = VideoSetup('Q1_task3_vid');
+% video.open();
+
 set(0,'DefaultLegendAutoUpdate','off')
 
 mu=0.5;
@@ -48,7 +51,7 @@ grid on;
 h4 = subplot(2,2,4);
 hold on;
 xlabel('time (ms)');
-ylabel('k_x,k_y (\gamma/2\pi)(mT/s))');
+ylabel('k_x,k_y (\gamma/2\pi)(mTms/m))');
 xlim([0, 0.32+(3.*Ts./2)]);
 ylim([-15 15]);
 grid on; 
@@ -92,7 +95,7 @@ for i=0:noOfSteps-1
     plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on
     legend(h4,{'k_x','k_y'})
-    
+    VideoAddFrame(video, h);
     pause(0.1);
     
     ClearLinesFromAxes(h1);
@@ -121,7 +124,7 @@ T2=10;
 stage=2;
 Gx=-4.6;
 
-w=linspace(-2.*Gx,2.*Gx,no_of_spins);
+w=linspace(-Gx,Gx,no_of_spins);
 
 h2 = subplot(2,2,2);
 hold on;
@@ -184,7 +187,7 @@ for i = 1:(N./2)
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    
     
-    
+    VideoAddFrame(video, h);
     pause(0.001);
     
     ClearLinesFromAxes(h1);
@@ -196,7 +199,7 @@ end
 %-Gx is on for Ts and ADC is on
 
 Gx=4.6;
-w=linspace(-2.*Gx,2.*Gx,no_of_spins);
+w=linspace(-Gx,Gx,no_of_spins);
 
 for i = 1:N
     
@@ -246,9 +249,10 @@ for i = 1:N
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    
     
-    
+    VideoAddFrame(video, h);
     pause(0.001);
     
     ClearLinesFromAxes(h1);
 end
 hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus6); 
+video.close(); 

@@ -124,7 +124,7 @@ T2=10;
 stage=2;
 Gx=-4.6;
 
-w=linspace(-2.*Gx,2.*Gx,no_of_spins);
+w=linspace(-Gx,Gx,no_of_spins);
 
 h2 = subplot(2,2,2);
 hold on;
@@ -199,7 +199,7 @@ end
 %-Gx is on for Ts and ADC is on
 
 Gx=4.6;
-w=linspace(-2.*Gx,2.*Gx,no_of_spins);
+w=linspace(-Gx,Gx,no_of_spins);
 
 for i = 1:N
     

@@ -121,7 +121,7 @@ Ts=5.12;
 stage=2;
 Gx=-4.6;
 
-w=linspace(-4.*Gx,4.*Gx,no_of_spins);
+w=linspace(-Gx,Gx,no_of_spins);
 
 h2 = subplot(2,2,2);
 hold on;
