@@ -11,7 +11,7 @@ for i=1:5
     theta=0;
     phi=pi./2;
     
-    N=256;
+    N=25;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;
@@ -41,9 +41,9 @@ for i=1:5
     hold on;
     axis equal;
     view(100, 10);
-    xlabel('x');
-    ylabel('y');
-    zlabel('z');
+    xlabel('x (mm)');
+    ylabel('y (mm)');
+    zlabel('z (mm)');
     xlim([-12 12]);
     ylim([-12 12]);
     zlim([0 0.5]);
@@ -96,8 +96,8 @@ for i=1:5
     h1=subplot(2,3,1);
     hold on;
     axis equal;
-    xlabel('x');
-    ylabel('y');
+    xlabel('x (mm)');
+    ylabel('y (mm)');
     xlim([-12 12]);
     ylim([-12 12]);
     grid on;
@@ -121,7 +121,7 @@ for i=1:5
     h4 = subplot(2,3,4);
     hold on;
     xlabel('time (ms)');
-    ylabel('G_x,G_y');
+    ylabel('G_x,G_y (mT/m)');
     xlim([0, 0.32+(1.5.*Ts)]);
     ylim([-GMax GMax]);
     grid on; 
@@ -129,17 +129,17 @@ for i=1:5
     h5 = subplot(2,3,5);
     hold on;
     xlabel('time (ms)');
-    ylabel('k_x,k_y');
+    ylabel('k_x,k_y (\gamma/2\pi)(mTms/m))');
     xlim([0, 0.32+(1.5.*Ts)]);
-    ylim([-3 3]);
+    ylim([-15 15]);
     grid on;
 
     h6 = subplot(2,3,6);
     hold on;
     xlabel('k_x');
     ylabel('k_y');
-    xlim([-2 2]);
-    ylim([-2 2]);
+    xlim([-15 15]);
+    ylim([-15 15]);
     grid on;
 
     set(0,'DefaultLegendAutoUpdate','off')
@@ -167,8 +167,8 @@ for i=1:5
 
         t_from_start=0.32+(i.*(Ts./(N)));
         t=(i.*(Ts./(N)));
-        ky1=0.1.*Gy1.*t;
-        kx1=0.1.*Gx1.*t;
+        ky1=Gy1.*t;
+        kx1=Gx1.*t;
 
 
         for k = 1:no_of_spins
@@ -244,7 +244,7 @@ for i=1:5
 
         t_from_start=(0.32)+(Ts./2)+(i.*(Ts./N));
         t=(i.*(Ts./N));
-        kx2=(0.1.*Gx2.*t)+kx1;
+        kx2=(Gx2.*t)+kx1;
 
         for k = 1:no_of_spins
             %Moving initial vector to near origin

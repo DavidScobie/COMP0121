@@ -26,9 +26,9 @@ h1=subplot(2,2,1);
 hold on;
 axis equal;
 view(100, 10);
-xlabel('x');
-ylabel('y');
-zlabel('z');
+xlabel('x (mm)');
+ylabel('y (mm)');
+zlabel('z (mm)');
 xlim([-L./2 L./2]);
 ylim([-0.5 0.5]);
 zlim([0 0.5]);
@@ -37,7 +37,7 @@ grid on;
 h3 = subplot(2,2,3);
 hold on;
 xlabel('time (ms)');
-ylabel('G_x,G_y');
+ylabel('G_x,G_y (mT/m)');
 xlim([0, 5.44]);
 ylim([-5 5]);
 grid on; 
@@ -45,9 +45,9 @@ grid on;
 h4 = subplot(2,2,4);
 hold on;
 xlabel('time (ms)');
-ylabel('k_x,k_y');
+ylabel('k_x,k_y (\gamma/2\pi)(mTms/m))');
 xlim([0, 5.44]);
-ylim([-3 3]);
+ylim([-30 30]);
 grid on; 
 
 Gx=0;
@@ -103,8 +103,8 @@ delete(h1)
 h1=subplot(2,2,1);
 hold on;
 axis equal;
-xlabel('x');
-ylabel('y');
+xlabel('x (mm)');
+ylabel('y (mm)');
 xlim([-L./2 L./2]);
 ylim([-L./2 L./2]);
 grid on;
@@ -143,7 +143,7 @@ for i = 1:N
     
     t_from_start=0.32+(i.*(Ts./N));
     t=(i.*(Ts./N));
-    kx=0.1.*Gx.*t;
+    kx=Gx.*t;
     
     for k = 1:no_of_spins
         vecMus3(1,k)=exp((-t)./T2).*((vecMus2(1,11).*cos(w(k).*t))+((vecMus2(2,11).*(sin(w(k).*t)))));

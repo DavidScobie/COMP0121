@@ -1,5 +1,9 @@
 clear all
 close all
+
+% video = VideoSetup('Q1_task1_vid');
+% video.open();
+
 set(0,'DefaultLegendAutoUpdate','off')
 
 mu=0.5;
@@ -29,8 +33,8 @@ h1=subplot(2,2,1);
 hold on;
 axis equal;
 view(100, 10);
-xlabel('x');
-ylabel('y');
+xlabel('x (mm)');
+ylabel('y (mm)');
 zlabel('z');
 xlim([-L./2 L./2]);
 ylim([-0.5 0.5]);
@@ -42,7 +46,7 @@ G=0;
 h3 = subplot(2,2,3);
 hold on;
 xlabel('time (ms)');
-ylabel('G_x,G_y');
+ylabel('G_x,G_y (mT/m)');
 xlim([0, Ts+0.32]);
 ylim([-5 5]);
 grid on; 
@@ -52,7 +56,7 @@ K=0;
 h4 = subplot(2,2,4);
 hold on;
 xlabel('time (ms)');
-ylabel('k_x,k_y');
+ylabel('k_x,k_y (\gamma/2\pi)(mTms/m))');
 xlim([0, Ts+0.32]);
 ylim([-0.6 0.6]);
 grid on; 
@@ -86,7 +90,7 @@ for i=0:noOfSteps-1
     plot(h4,t,K,'Color','b','Marker', '.', 'MarkerSize', 10);
     
     pause(0.1);
-    
+%     VideoAddFrame(video, h);
     ClearLinesFromAxes(h1);
 
 end
@@ -98,8 +102,8 @@ delete(h1)
 h1=subplot(2,2,1);
 hold on;
 axis equal;
-xlabel('x');
-ylabel('y');
+xlabel('x (mm)');
+ylabel('y (mm)');
 xlim([-L./2 L./2]);
 ylim([-L./2 L./2]);
 grid on;
@@ -154,7 +158,7 @@ for i=1:N
     plot(h4,t_from_start,K,'Color','b','Marker', '.', 'MarkerSize', 10);
     legend(h4,{'k_y','k_x'})
     
-    
+%     VideoAddFrame(video, h);
     pause(0.001);
     
 %     legend(h3,'off')
@@ -163,3 +167,4 @@ for i=1:N
     
 end
 h1 = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus2);
+% video.close();
