@@ -27,7 +27,7 @@ function objHandle = plotSpin3D_1Dline(stage,no_of_spins,t,figHandle,vecMus,colo
             objHandle(2)=plot(figHandle,vecMus(1,i),vecMus(2,i),...
                 'Color', colors(2), 'Marker', '.', 'MarkerSize', 10);            
         end     
+    title('ADC on')
 
-title(['t=',num2str(t,'%.2f'),'ms'])
 % legend('hide')
 end

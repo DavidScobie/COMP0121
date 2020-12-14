@@ -81,7 +81,7 @@ for i=1:5
 
 
         pause(0.001);
-
+        title(h1,['t=',num2str(t,'%.2f'),'ms'])
         ClearLinesFromAxes(h1);
 
     end
@@ -187,6 +187,7 @@ for i=1:5
 
         hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
         legend(h1,'hide')
+        title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
 
         %Calculating transverse magnetisation
         for i = 1:no_of_spins    
@@ -196,7 +197,7 @@ for i=1:5
         Mxtot=sum(Mx./(no_of_spins.*mu));
         Mytot=sum(My./(no_of_spins.*mu));
 
-        hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
+        hMTrans = plot_Task1_MTrans_ADC_off(t_from_start,h2,Mxtot,Mytot);
         legend(h2,{'M_x','M_y'})
 
         MTrans=Mxtot+Mytot./2;
@@ -261,6 +262,7 @@ for i=1:5
 
         hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus3reset);
         legend(h1,'hide')
+        title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
 
             %Calculating transverse magnetisation
         for i = 1:no_of_spins    

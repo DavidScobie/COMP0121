@@ -74,6 +74,7 @@ for i=0:noOfSteps-1
     
     %Plot the spin vectors
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus);
+    title(h1,['t=',num2str(t,'%.2f'),'ms'])
     
     plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
 %     legend('k_t_o_t');
@@ -127,6 +128,7 @@ for i=1:N
     
     legend(h1,'hide')
     hVecMu2 = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus2);
+    title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
     
     %Calculating transverse magnetisation
     for i = 1:no_of_spins    

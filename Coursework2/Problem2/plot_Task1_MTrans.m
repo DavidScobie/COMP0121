@@ -21,7 +21,7 @@ hold on
 % legend;
 
 
-% title(['t=',num2str(t,'%.2f'),'ms'])
+title('ADC on')
 
 end
 

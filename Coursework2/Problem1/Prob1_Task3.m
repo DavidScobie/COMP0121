@@ -76,7 +76,7 @@ for i=0:noOfSteps-1
     
     %Plot the spin vectors
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t,h1, vecMus);
-    
+    title(h1,['t=',num2str(t,'%.2f'),'ms'])
     
     plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
     %     legend('k_t_o_t');
@@ -156,8 +156,9 @@ for i = 1:(N./2)
         vecMus4(2,k)=vecMus3(2,k);        
     end
      
-    hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus4);
+    hVecMu = plotSpin3D_1Dline_ADC_off(stage,no_of_spins,t_from_start,h1, vecMus4);
     legend(h1,'hide')
+    title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
     
     %Calculating transverse magnetisation
     for i = 1:no_of_spins    
@@ -167,7 +168,7 @@ for i = 1:(N./2)
     Mxtot=sum(Mx./(no_of_spins.*mu));
     Mytot=sum(My./(no_of_spins.*mu));
     
-%     hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
+    hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
     
     
     plot(h3,t_from_start,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
@@ -219,7 +220,7 @@ for i = 1:N
      
     hVecMu = plotSpin3D_1Dline(stage,no_of_spins,t_from_start,h1, vecMus6);
     legend(h1,'hide')
-
+    title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
     
     %Calculating transverse magnetisation
     for i = 1:no_of_spins    
