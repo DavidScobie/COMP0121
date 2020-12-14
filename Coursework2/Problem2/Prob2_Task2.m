@@ -5,7 +5,6 @@ set(0,'DefaultLegendAutoUpdate','off')
 % video = VideoSetup('Q2_task2_vid');
 % video.open();
 
-% for i=5
 for i=1:5
     Gstep=(i-3).*2.3;
 
@@ -13,7 +12,7 @@ for i=1:5
     theta=0;
     phi=pi./2;
     
-    N=100;
+    N=256;
     GMax=4.6;
     Ts=5.12;
     noOfSteps = 16;
@@ -209,14 +208,12 @@ for i=1:5
 
 
         plot(h4,t_from_start,Gx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h4,t_from_start,Gy1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
         legend(h4,{'G_x','G_y'})
 
         plot(h5,t_from_start,kx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on
@@ -282,14 +279,12 @@ for i=1:5
         hold on  
 
         plot(h4,t_from_start,Gx2,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h4,t_from_start,Gy2,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
 
 
         plot(h5,t_from_start,kx2,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky2,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on    

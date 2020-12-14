@@ -82,7 +82,6 @@ for i=0:noOfSteps-1
     title(h1,['t=',num2str(t,'%.2f'),'ms'])
     
     plot(h3,t,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h3,t,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
     hold on
@@ -90,7 +89,6 @@ for i=0:noOfSteps-1
     legend(h3,{'G_x','G_y'})
     
     plot(h4,t,kx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h4,t,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on
@@ -175,14 +173,12 @@ for i = 1:(N./2)
     
     
     plot(h3,t_from_start,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h3,t_from_start,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
     hold on
     
     
     plot(h4,t_from_start,kx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    
@@ -237,14 +233,12 @@ for i = 1:N
     
     
     plot(h3,t_from_start,Gx,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h3,t_from_start,Gy,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
     hold on
     
     
     plot(h4,t_from_start,kx2,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-    %     legend('k_t_o_t');
     hold on
     plot(h4,t_from_start,ky,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
     hold on    

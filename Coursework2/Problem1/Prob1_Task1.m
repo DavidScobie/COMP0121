@@ -5,7 +5,7 @@ close all
 % video.open();
 
 set(0,'DefaultLegendAutoUpdate','off')
-
+%Defining parameters for B1 flip
 mu=0.5;
 theta=0;
 phi=pi./2;
@@ -63,7 +63,7 @@ grid on;
 
 stage=1;
 t=0;
-
+%the B1 flip 
 for i=0:noOfSteps-1
     
     t=(i+1).*0.02;
@@ -81,11 +81,9 @@ for i=0:noOfSteps-1
     title(h1,['t=',num2str(t,'%.2f'),'ms'])
     
     plot(h3,t,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
-%     legend('k_t_o_t');
     hold on
     plot(h3,t,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
     plot(h4,t,K,'Color','r','Marker', '.', 'MarkerSize', 10);
-%     legend(h3);
     hold on
     plot(h4,t,K,'Color','b','Marker', '.', 'MarkerSize', 10);
     
@@ -120,7 +118,7 @@ xlim([0, 0.32]);
 ylim([-1 1]);
 grid on; 
 
-%Change Mtrans time axes limit
+%The exponential decay with T2
 xlim(h2,[0 Ts+0.32])
 
 for i=1:N
@@ -145,7 +143,6 @@ for i=1:N
     hMTrans = plot_Task1_MTrans(t_from_start,h2,Mxtot,Mytot);
     
     plot(h3,t_from_start,G,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
-%     legend('k_t_o_t');
     hold on
     plot(h3,t_from_start,G,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_t_o_t');
     plot(h4,t_from_start,K,'Color','r','Marker', '.', 'MarkerSize', 10);
@@ -160,8 +157,6 @@ for i=1:N
     
 %     VideoAddFrame(video, h);
     pause(0.001);
-    
-%     legend(h3,'off')
     
     ClearLinesFromAxes(h1);
     

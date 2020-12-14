@@ -20,17 +20,11 @@ for i=1:5
     spin_spacing=1;
     
     %The initial spin vector magnitudes
-    
-    %vecMus0=[-15,-10,-5,0,-15,-10,-5,0,-15,-10,-5,0,-15,-10,-5,0,5,10,15,0,5,10,15,0,5,10,15,0,5,10,15;-15,-15,-15,-15,-10,-10,-10,-10,-5,-5,-5,-5,0,0,0,0,0,0,0,5,5,5,5,10,10,10,10,15,15,15,15;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5]
-    
+       
     %Uniform square distribution
-    %vecMus0=[-11,-6,-1,-11,-6,-1,-11,-6,-1,1,6,11,1,6,11,1,6,11;-11,-11,-11,-6,-6,-6,-1,-1,-1,1,1,1,6,6,6,11,11,11;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
-    vecMus0=[0,-10,-5,-0,-10,-5,-0,-10,-5,-0,0,5,10,0,5,10,0,5,10;0,-10,-10,-10,-5,-5,-5,-0,-0,-0,0,0,0,5,5,5,10,10,10;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
-%     vecMus0(1:2,:)=(vecMus0(1:2,:))./2;
     
-    %Uniform square with a few rogue spins
-    %vecMus0=[-4,-2,6,1,7,-3,-10,-5,0,-10,-5,0,-10,-5,0,5,10,0,5,10,0,5,10;-7,-1,9,5,4,-2,-10,-10,-10,-5,-5,-5,0,0,0,0,0,5,5,5,10,10,10;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
-
+    vecMus0=[0,-10,-5,-0,-10,-5,-0,-10,-5,-0,0,5,10,0,5,10,0,5,10;0,-10,-10,-10,-5,-5,-5,-0,-0,-0,0,0,0,5,5,5,10,10,10;0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
+    
     vecMusReset=vecMus0;
     
     siz=size(vecMus0);
@@ -156,7 +150,6 @@ for i=1:5
     T2=10;
 
     stage=2;
-%     Gy1=4.6.*(-256./256);
     Gy1=Gstep;
     kx1=0;
     Gx1=0;
@@ -192,7 +185,6 @@ for i=1:5
         end
 
         hVecMu = plotSpin3D_2Dgrid(stage,no_of_spins,t_from_start,h1,vecMus0orig(1:2,:),vecMus2reset);
-%         legend(h1,'hide')
         title(h1,['t=',num2str(t_from_start,'%.2f'),'ms'])
 
         %Calculating transverse magnetisation
@@ -211,7 +203,6 @@ for i=1:5
         hold on
 
         plot(h4,t_from_start,Gx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h4,t_from_start,Gy1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
@@ -219,7 +210,6 @@ for i=1:5
 
 
         plot(h5,t_from_start,kx1,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky1,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on
@@ -291,14 +281,12 @@ for i=1:5
         hold on   
 
         plot(h4,t_from_start,Gx2,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h4,t_from_start,Gy2,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
 
 
         plot(h5,t_from_start,kx2,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky2,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on    
@@ -365,14 +353,12 @@ for i=1:5
         hold on  
 
         plot(h4,t_from_start,Gx3,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','M_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h4,t_from_start,Gy3,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','M_y');
         hold on
 
 
         plot(h5,t_from_start,kx3,'Color','b','Marker', '.', 'MarkerSize', 10,'DisplayName','k_x');
-        %     legend('k_t_o_t');
         hold on
         plot(h5,t_from_start,ky3,'Color','r','Marker', '.', 'MarkerSize', 10,'DisplayName','k_y');
         hold on    
