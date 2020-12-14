@@ -103,14 +103,3 @@ end
 
 
 
-
-%     %time variance of theta
-%     theta=theta+((2.*pi.*t)./200);
-% 
-%     %time variation of mux, muy and muz
-%     mux0=1;
-%     muy0=1;
-%     muz0=1;
-%     muxt=(mux0.*cos(theta))+(muy0.*sin(theta));
-%     muyt=(-mux0.*sin(theta))+(muy0.*cos(theta));
-%     muzt=muz0;
