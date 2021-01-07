@@ -40,12 +40,12 @@ colormap('gray');
 title('fourier transform')
 axis xy
 
-
 rect_L_edge=113;
 rect_R_edge=145;
-%low pass filter
-rect=zeros(256);
-rect(rect_L_edge:rect_R_edge,rect_L_edge:rect_R_edge)=1;
+
+%high pass filter
+rect=ones(256);
+rect(rect_L_edge:rect_R_edge,rect_L_edge:rect_R_edge)=0;
 subplot(3,3,3)
 imagesc(kx_lims,ky_lims,rect)
 axis image
@@ -78,7 +78,6 @@ colormap('gray');
 title('filtered fourier transform')
 axis xy
 
-
 fil_img=(ifft2(ifftshift(lpf)));
 subplot(3,3,6)
 imagesc(xlims,ylims,abs(fil_img))
@@ -100,5 +99,3 @@ ylabel('y/m')
 colormap('gray');
 title('convolution of PSF with original image')
 axis xy
-
-
