@@ -23,7 +23,7 @@ axis xy
 xlabel('x/m')
 ylabel('y/m')
 colormap('gray');
-title('Original image')
+title('a) Original image')
 
 %fft of the image
 kx_lims=[-500 500-3.90625];
@@ -37,7 +37,7 @@ axis image
 xlabel('kx/(1/m)')
 ylabel('ky/(1/m)')
 colormap('gray');
-title('fourier transform')
+title('b) fourier transform')
 axis xy
 
 rect_L_edge=113;
@@ -52,7 +52,7 @@ axis image
 xlabel('kx/(1/m)')
 ylabel('ky/(1/m)')
 colormap('gray');
-title('rect filter')
+title('c) rect filter')
 axis xy
 
 %PSF
@@ -63,7 +63,7 @@ axis image
 xlabel('x/m')
 ylabel('y/m')
 colormap('gray');
-title('IFT of rect filter (PSF)')
+title('d) IFT of rect filter (PSF)')
 axis xy
 
 %filtered fft way
@@ -75,7 +75,7 @@ axis image
 xlabel('kx/(1/m)')
 ylabel('ky/(1/m)')
 colormap('gray');
-title('filtered fourier transform')
+title('e) filtered fourier transform')
 axis xy
 
 fil_img=(ifft2(ifftshift(lpf)));
@@ -85,7 +85,7 @@ axis image
 xlabel('x/m')
 ylabel('y/m')
 colormap('gray');
-title('IFT of filtered FT')
+title('f) IFT of filtered FT')
 axis xy
 
 %convolution of PSF and original brain
@@ -97,5 +97,5 @@ axis image
 xlabel('x/m')
 ylabel('y/m')
 colormap('gray');
-title('convolution of PSF with original image')
+title('g) convolution of PSF with original image')
 axis xy

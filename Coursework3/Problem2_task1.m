@@ -12,10 +12,11 @@ end
 coords(2,:)=repmat(linspace(-0.128,0.127,256),1,256);
 
 xlims=[coords(1,1) coords(1,65536)];
-ylims=[coords(2,1) coords(2,65536)];
+ylims=[0.128 -0.128];
 
 imagesc(xlims,ylims,brain)
 axis image
-axis ij
+axis xy
 xlabel('x/m')
 ylabel('y/m')
+colormap('gray');
