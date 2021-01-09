@@ -11,8 +11,9 @@ for i = 1:128
 end
 subplot(3,2,1:2)
 plot(k,Gk)
-xlabel('k')
+xlabel('k/(1/m)')
 ylabel('G(k)')
+title('Gaussian function')
 
 k0=-2500;
 index=(k0./125)+65;
