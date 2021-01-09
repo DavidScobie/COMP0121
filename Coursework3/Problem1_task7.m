@@ -13,19 +13,19 @@ for i = 1:128
 end
 Hanning(1:56)=0;
 Hanning(74:128)=0;
-subplot(4,2,1)
+subplot(4,2,3)
 plot(k,Hanning);
-title('Hanning filter')
+title('b) Hanning filter')
 xlabel('k(1/m)')
 ylabel('H(k)')
 
 %Define gaussian function
 Gk = exp(-(k.^2)./(2.*(1000.^2)));
-subplot(4,2,2)
+subplot(4,2,1:2)
 plot(k,Gk)
 xlabel('k(1/m)')
 ylabel('G(k)')
-title('Gaussian function')
+title('a) Gaussian function')
 
 %% PSF way
 
@@ -42,29 +42,29 @@ end
 %IFT((H(k)rect(k))
 x=linspace(-0.004,0.004-(2.*(0.004./128)),128);
 signal_H=ifftshift(ifft(fftshift(tot_filter)));
-subplot(4,2,3)
+subplot(4,2,4)
 plot(x,signal_H)
 xlabel('x/m')
 ylabel('signal')
-title('IFT of Hanning filter in addition to rect filter (PSF)')
+title('c) IFT(H(k)*rect(k))     also called: PSF')
 
 %IFT of gaussian function
 signal_g=ifftshift(ifft(fftshift(Gk)));
-subplot(4,2,4)
+subplot(4,2,5)
 plot(x,real(signal_g))
 hold on
 plot(x,imag(signal_g))
 legend('real','imaginary')
 xlabel('x/m')
 ylabel('signal')
-title('IFT of gaussian function')
+title('d) IFT of gaussian function')
 
 %Convolution of IFT of Hanning filter and IFT of gaussian function
 conv_signal=conv(signal_H,signal_g);
 trunc_conv_signal=conv_signal(65:192);
 subplot(4,2,6)
 plot(x,trunc_conv_signal);
-title('Convolution of PSF and IFT(G(k))')
+title('e) Convolution of PSF and IFT(G(k))')
 xlabel('x/m')
 ylabel('signal')
 
@@ -79,11 +79,11 @@ subplot(4,2,7)
 plot(k,filt_Gk);
 xlabel('k(1/m)')
 ylabel('G(k)*rect(k)*H(k)')
-title('G(k) with filter applied')
+title('f) G(k) with filter applied')
 
 signal_filt=ifftshift(ifft(fftshift(filt_Gk)));
 subplot(4,2,8)
 plot(x,signal_filt);
 xlabel('x/m')
 ylabel('signal')
-title('IFT of filtered G(k)')
+title('g) IFT of filtered G(k)')

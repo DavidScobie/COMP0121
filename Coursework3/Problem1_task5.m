@@ -67,7 +67,7 @@ end
 
 ylabel('G(k0)*\delta(k-k0)')
 xlabel('k(1/m)')
-title('Scaled and translated impulse function')
+title('Scaled and translated impulse functions')
     
     
     
