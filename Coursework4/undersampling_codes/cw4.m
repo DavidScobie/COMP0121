@@ -25,6 +25,9 @@ for i = 1:192
         end
     end
 end
+figure;
+imshow(circle)
+title('binary circle')
 fft_circ=circle.*fftshift(FTP);
 figure;
 image(abs(fft_circ))
@@ -78,9 +81,72 @@ figure;
 image(abs(k_1_line))
 title('k space of a line from centre to edge of circle (8,134)')
 
-%Now find a way to include this in with the 4 spokes k space without
-%overlapping
+%% Attempting finding indicies of minimums on LHS of the circle
+j_pos_L = zeros(1,192);
+rad_cont_L = zeros(192,96);
+for i = 1:192
+    for j = 1:96
+        rad_cont_L(i,j) = ((i-r).^2)+((j-r).^2) - (r.^2);
+    end
+    minimum = min(abs(rad_cont_L(i,:)));
+    j_pos_L(i) = find(abs(rad_cont_L(i,:))==minimum);
+end
 
+%Now for RHS
+j_pos_R = zeros(1,192);
+for i = 1:192
+    j_pos_R(i) = 96+(96-j_pos_L(i));
+end
+
+row = 1:192;
+figure;
+plot(j_pos_L,row,'-b');
+hold on
+plot(j_pos_R,row,'-b');
+title('Boundary of circle')
+
+%% Finding the lines to the edge of the whole circle
+
+log_space = zeros(192);
+% LHS first
+for j = 1:192
+    line=zeros(96,2);
+    log_1_line = zeros(192);
+    x=linspace(96,j_pos_L(j),96);
+    y=linspace(96,row(j),96);
+    for i=1:96
+        line(i,1) = round(y(i));
+        line(i,2) = round(x(i));
+        log_1_line(line(i,1),line(i,2)) = 1;
+    end
+    log_space = log_space + log_1_line;
+end
+
+%RHS
+for j = 1:192
+    line=zeros(96,2);
+    log_1_line = zeros(192);
+    x=linspace(96,j_pos_R(j),96);
+    y=linspace(96,row(j),96);
+    for i=1:96
+        line(i,1) = round(y(i));
+        line(i,2) = round(x(i));
+        log_1_line(line(i,1),line(i,2)) = 1;
+    end
+    log_space = log_space + log_1_line;
+end
+
+%Normalising all values to 1
+for i = 1:192
+    for j = 1:192
+        if log_space(i,j)~=0;
+           log_space(i,j)=1;
+        end
+    end
+end
+figure;
+imshow(log_space)
+title('Fully sampled radial grid')
 
 
 
