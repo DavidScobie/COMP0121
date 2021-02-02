@@ -83,9 +83,9 @@ title('k space of a line from centre to edge of circle (8,134)')
 
 %% Attempting finding indicies of minimums on LHS of the circle
 j_pos_L = zeros(1,192);
-rad_cont_L = zeros(192,96);
+rad_cont_L = zeros(192,r);
 for i = 1:192
-    for j = 1:96
+    for j = 1:r
         rad_cont_L(i,j) = ((i-r).^2)+((j-r).^2) - (r.^2);
     end
     minimum = min(abs(rad_cont_L(i,:)));
@@ -95,7 +95,7 @@ end
 %Now for RHS
 j_pos_R = zeros(1,192);
 for i = 1:192
-    j_pos_R(i) = 96+(96-j_pos_L(i));
+    j_pos_R(i) = r+(r-j_pos_L(i));
 end
 
 row = 1:192;
@@ -110,11 +110,11 @@ title('Boundary of circle')
 log_space = zeros(192);
 % LHS first
 for j = 1:192
-    line=zeros(96,2);
+    line=zeros(r,2);
     log_1_line = zeros(192);
-    x=linspace(96,j_pos_L(j),96);
-    y=linspace(96,row(j),96);
-    for i=1:96
+    x=linspace(r,j_pos_L(j),r);
+    y=linspace(r,row(j),r);
+    for i=1:r
         line(i,1) = round(y(i));
         line(i,2) = round(x(i));
         log_1_line(line(i,1),line(i,2)) = 1;
@@ -124,11 +124,11 @@ end
 
 %RHS
 for j = 1:192
-    line=zeros(96,2);
+    line=zeros(r,2);
     log_1_line = zeros(192);
-    x=linspace(96,j_pos_R(j),96);
-    y=linspace(96,row(j),96);
-    for i=1:96
+    x=linspace(r,j_pos_R(j),r);
+    y=linspace(r,row(j),r);
+    for i=1:r
         line(i,1) = round(y(i));
         line(i,2) = round(x(i));
         log_1_line(line(i,1),line(i,2)) = 1;
@@ -148,7 +148,19 @@ figure;
 imshow(log_space)
 title('Fully sampled radial grid')
 
+%% Now IFT of fully sampled radial trajectory
+k_rad_full = zeros(192);
+k_rad_full = fft_circ .* log_space;
+figure;
+image(abs(k_rad_full))
+title('k space of fully sampled radial trajectory')
 
+%We then IFT this
+IFT_rad_full = ifft2(k_rad_full);
+figure;
+imagesc(abs(IFT_rad_full));
+title('IFT of full radial trajectory')
+%aliasing around the corners is visible
 
 
 
